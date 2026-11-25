@@ -1,5 +1,9 @@
 # AGENTS.md
 
+## Reproducing this site
+
+For setup, visual verification, or deployment, start with [the reproduction guide](docs/reproduce.md). The captured frontend in `site/` is the build input. Build output in `dist/` is generated and must not be edited directly.
+
 ## Agent skills
 
 Skills come from [mattpocock/skills](https://github.com/mattpocock/skills), installed into `.claude/skills/` with `npx skills add mattpocock/skills` and pinned in `skills-lock.json`. Do not edit them locally; update with `npx skills update`.

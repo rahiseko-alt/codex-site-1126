@@ -1,10 +1,10 @@
 # 表示と動作の確認
 
-参照は carterogunsola.com の公開サイト。再現版はこのリポジトリのビルドを Chromium で開いた。比較画像は左が参照、右が再現版。デスクトップは 1440 × 900、モバイルは 390 × 844、どちらも DPR 1。
+参照は carterogunsola.com の公開サイト。再現版はこのリポジトリのビルドを Chromium で開いた。比較画像は左が参照、右が再現版。トップのデスクトップは 1200 × 750、モバイルは 390 × 844、コマンドメニューは 1440 × 900。いずれも DPR 1。
 
-- [デスクトップ比較](/workspace/shared/carter-qa/desktop.png)
-- [モバイル比較](/workspace/shared/carter-qa/mobile.png)
-- [コマンドメニュー比較](/workspace/shared/carter-qa/command-menu.png)
+- [デスクトップ比較](docs/qa/home-desktop.png)
+- [モバイル比較](docs/qa/home-mobile.png)
+- [コマンドメニュー比較](docs/qa/command-menu.png)
 
 ナビゲーションの配置、本文とタグの書体、背景の粒子、配色、作品カードの画像とレイアウトを確認した。WebGL の初期化中は両方でワイヤーフレームが表示されたため、画像が描画された状態で撮り直した。回転、ズーム、文字アニメーションは撮影時点で異なる。モバイルのメニューも開いて配置を比較した。
 
