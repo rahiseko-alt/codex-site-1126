@@ -1,8 +1,8 @@
 # AGENTS.md
 
-## Reproducing this site
+## Working on a site
 
-For setup, visual verification, or deployment, start with [the reproduction guide](docs/reproduce.md). The captured frontend in `site/` is the build input. Build output in `dist/` is generated and must not be edited directly.
+Choose the target from the [root site index](README.md), then read that site's own README. Run install, build, and preview commands from that site's folder. Each folder owns its source, dependencies, reference images, and hosting configuration. Follow the [site layout guide](docs/site-layout.md) when adding another site.
 
 ## Agent skills
 
