@@ -31,10 +31,9 @@ const server = createServer((request, response) => {
     if (request.method === 'POST') {
       request.resume();
       response.writeHead(204).end();
-    } else {
-      json(response, 200, {});
+      return;
     }
-    return;
+    request.url = '/data/vitals.json';
   }
   if (pathname === '/api/contact' && request.method === 'POST') {
     request.resume();

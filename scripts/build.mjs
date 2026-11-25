@@ -21,6 +21,10 @@ if (process.argv.includes('--sites')) {
   await cp(new URL('./sites-socket.mjs', import.meta.url), new URL('sites-socket.js', modules));
   await patch('Base.astro_', 'this._options.WebSocket||WebSocket', 'this._options.WebSocket||SitesSocket');
   await patch('Base.astro_', 'import{', 'import { SitesSocket } from "./sites-socket.js";\nimport{');
-  await patch('Base.astro_', 'this.started=!0;let e=j.presence.host;', 'this.started=!0;return;let e=j.presence.host;');
+  await patch(
+    'Base.astro_',
+    'this.started=!0;let e=j.presence.host;',
+    'this.started=!0;this.url="/data/vitals.json";this.loadAggregate();return;let e=j.presence.host;',
+  );
   await patch('about-radio.', '`/api/radio`', '`/data/radio.json`');
 }
