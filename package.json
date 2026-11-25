@@ -1,0 +1,19 @@
+{
+  "name": "codex-site-1126",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "build": "node scripts/build.mjs",
+    "start": "node server.mjs --production",
+    "build:sites": "node scripts/build.mjs --sites"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "sirv": "^3.0.2",
+    "ws": "^8.18.3"
+  }
+}

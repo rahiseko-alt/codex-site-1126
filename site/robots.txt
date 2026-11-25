@@ -1,0 +1,7 @@
+# All crawlers welcome — including AI training + answer-engine bots
+# (GPTBot, OAI-SearchBot, ClaudeBot, Claude-SearchBot, PerplexityBot,
+# Google-Extended). Being findable and citable is the point of a portfolio.
+User-agent: *
+Allow: /
+
+Sitemap: https://carterogunsola.com/sitemap-index.xml

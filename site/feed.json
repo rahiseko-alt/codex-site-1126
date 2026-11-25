@@ -1,0 +1,166 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "Carter Ogunsola :: Ship log",
+  "home_page_url": "https://carterogunsola.com/changelog",
+  "feed_url": "https://carterogunsola.com/feed.json",
+  "description": "New experiments, projects, roles, and recognition, as they ship.",
+  "language": "en",
+  "authors": [
+    {
+      "name": "Carter Ogunsola",
+      "url": "https://carterogunsola.com"
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-13-pocket-pal",
+      "url": "https://carterogunsola.com/lab/pocket-pal",
+      "title": "Pocket Pal",
+      "content_text": "A pocket game player with four games of its own.",
+      "date_published": "2026-11-13T00:00:00Z",
+      "tags": [
+        "Lab"
+      ]
+    },
+    {
+      "id": "2026-10-02-vocal-orb",
+      "url": "https://carterogunsola.com/lab/vocal-orb",
+      "title": "Vocal Orb",
+      "content_text": "A small black hole that listens.",
+      "date_published": "2026-10-02T00:00:00Z",
+      "tags": [
+        "Lab"
+      ]
+    },
+    {
+      "id": "2026-09-29-the-new-site-is-live",
+      "url": "https://carterogunsola.com/",
+      "title": "The new site is live",
+      "content_text": "Rebuilt from scratch. The press out front is what the shop makes.",
+      "date_published": "2026-09-29T00:00:00Z",
+      "tags": [
+        "Site"
+      ]
+    },
+    {
+      "id": "2026-09-16-the-personal-starter",
+      "url": "https://carterogunsola.com/writing/the-personal-starter",
+      "title": "The personal starter",
+      "content_text": "What I’d call a personal starter, what I’d keep in one, and the one I use for my own sites.",
+      "date_published": "2026-09-16T00:00:00Z",
+      "tags": [
+        "Writing"
+      ]
+    },
+    {
+      "id": "2026-08-27-paste-up",
+      "url": "https://carterogunsola.com/lab/paste-up",
+      "title": "Paste-Up",
+      "content_text": "One set of prints, three layout boards.",
+      "date_published": "2026-08-27T00:00:00Z",
+      "tags": [
+        "Lab"
+      ]
+    },
+    {
+      "id": "2026-07-08-live-cursors",
+      "url": "https://carterogunsola.com/lab/live-cursors",
+      "title": "Live Cursors",
+      "content_text": "Everyone else on the page, in real time.",
+      "date_published": "2026-07-08T00:00:00Z",
+      "tags": [
+        "Lab"
+      ]
+    },
+    {
+      "id": "2026-07-03-dial",
+      "url": "https://carterogunsola.com/lab/dial",
+      "title": "Dial",
+      "content_text": "A tuner dial you spin, with a click pitched to how fast you spun.",
+      "date_published": "2026-07-03T00:00:00Z",
+      "tags": [
+        "Lab"
+      ]
+    },
+    {
+      "id": "2026-07-03-heart",
+      "url": "https://carterogunsola.com/lab/heart",
+      "title": "Heart",
+      "content_text": "Taubin’s implicit heart surface, solved into a point cloud and spun on canvas.",
+      "date_published": "2026-07-03T00:00:00Z",
+      "tags": [
+        "Lab"
+      ]
+    },
+    {
+      "id": "2026-07-01-polka-dots",
+      "url": "https://carterogunsola.com/lab/polka-dots",
+      "title": "Polka Dots",
+      "content_text": "A grid of dots run as one spring integration on a single ticker.",
+      "date_published": "2026-07-01T00:00:00Z",
+      "tags": [
+        "Lab"
+      ]
+    },
+    {
+      "id": "2026-07-01-dynamic-scrollbar",
+      "url": "https://carterogunsola.com/lab/dynamic-scrollbar",
+      "title": "Dynamic Scrollbar",
+      "content_text": "A slim gray bar that blooms into a live analog clock as you scroll.",
+      "date_published": "2026-07-01T00:00:00Z",
+      "tags": [
+        "Lab"
+      ]
+    },
+    {
+      "id": "2026-07-01-rotating-gallery",
+      "url": "https://carterogunsola.com/lab/rotating-gallery",
+      "title": "Rotating Gallery",
+      "content_text": "A ring of image plates riding pure translateZ depth under a deep perspective.",
+      "date_published": "2026-07-01T00:00:00Z",
+      "tags": [
+        "Lab"
+      ]
+    },
+    {
+      "id": "2026-07-01-threejs-scene",
+      "url": "https://carterogunsola.com/lab/threejs-test",
+      "title": "ThreeJs Scene",
+      "content_text": "A vanilla Three.js scene, pared to the basis.",
+      "date_published": "2026-07-01T00:00:00Z",
+      "tags": [
+        "Lab"
+      ]
+    },
+    {
+      "id": "2026-06-20-opened-the-lab",
+      "url": "https://carterogunsola.com/lab",
+      "title": "Opened the Lab",
+      "content_text": "A gallery of motion experiments, live and configurable.",
+      "date_published": "2026-06-20T00:00:00Z",
+      "tags": [
+        "Lab"
+      ]
+    },
+    {
+      "id": "2026-02-13-1820-productions-case-study-on-codrops",
+      "url": "https://tympanus.net/codrops/2026/02/13/1820-productions-minimal-design-maximal-motion/",
+      "title": "1820 Productions case study on Codrops",
+      "content_text": "Minimal design, maximal motion :: the full build breakdown.",
+      "date_published": "2026-02-13T00:00:00Z",
+      "tags": [
+        "Writing"
+      ]
+    },
+    {
+      "id": "2026-01-15-joined-the-awwwards-jury",
+      "url": "https://www.awwwards.com/jury-member/carter-ogunsola",
+      "title": "Joined the Awwwards jury",
+      "content_text": "Scoring the work for 2026.",
+      "date_published": "2026-01-15T00:00:00Z",
+      "tags": [
+        "Award"
+      ]
+    }
+  ]
+}
