@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="66" height="38" viewBox="0 0 66 38" role="img" aria-label="Amazon logo (approximation)">
+
+  <!-- Rounded orange frame -->
+
+  <rect x="1" y="1" width="64" height="36" rx="4" ry="4" fill="none" stroke="#ff9900" stroke-width="1.6"/>
+
+
+  <!-- "amazon" wordmark (approximation) -->
+
+  <!-- Uses fallback font stack; for perfect match use Amazon Ember converted to paths -->
+
+  <text x="7" y="23" font-family="Amazon Ember, 'Arial Rounded MT Bold', Arial, sans-serif"
+
+        font-weight="700" font-size="15.5" fill="#2b2f33" letter-spacing="-0.2">amazon</text>
+
+
+  <!-- Swoosh/arrow under the word -->
+
+  <path d="M 9 26
+
+           C 20 30, 36 30, 50 26"
+
+        fill="none" stroke="#ff9900" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+
+  <!-- Arrow head (filled) -->
+
+  <path d="M52.5 24.2
+
+           C53.8 25.5, 56.2 26.8, 52.9 27.8
+
+           C51.4 28.4, 50.6 27.0, 49.9 25.9
+
+           C50.7 25.7, 51.6 25.3, 52.5 24.2 Z"
+
+        fill="#ff9900" />
+
+
+  <!-- Optional small smoothing near start of swoosh (thin cap) -->
+
+  <path d="M8.0 25.7 C9.0 25.9, 9.5 26.0, 9 26" fill="none" stroke="#ff9900" stroke-width="1.4" stroke-linecap="round"/>
+
+</svg>
+
+
+

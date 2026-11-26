@@ -1,0 +1,1 @@
+{"name":"emcell-recreation","version":"1.0.0","private":true,"type":"module","engines":{"node":">=20"},"scripts":{"dev":"node server.mjs","build":"node scripts/build.mjs","start":"node server.mjs --production"},"dependencies":{"sirv":"^3.0.2"}}
