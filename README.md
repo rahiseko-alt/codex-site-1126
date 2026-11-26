@@ -11,5 +11,7 @@
 | Telescope ランディングページ | [sites/telescope](sites/telescope/README.md) |
 | Maxima Therapy | [sites/maxima-therapy](sites/maxima-therapy/README.md) |
 | Ironside Computers | [sites/ironside-computers](sites/ironside-computers/README.md) |
+| Bohdan Ratiiev ポートフォリオ | [sites/bratiiev](sites/bratiiev/README.md) |
+| Eliza Doltu ポートフォリオ | [sites/eliza-doltu](sites/eliza-doltu/README.md) |
 
 [サイト追加のルール](docs/site-layout.md) · [開発テンプレートの資料](docs/development-template.md)
