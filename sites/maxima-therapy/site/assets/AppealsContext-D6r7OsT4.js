@@ -1,0 +1,1 @@
+import{a as t,p as s}from"./chunk-JMJ3UQ3L-pg1kTSKp.js";const r=t.createContext(void 0);function p({children:e,appealsPageInfo:o}){return s.jsx(r.Provider,{value:{appealsPageInfo:o},children:e})}function a(){const e=t.useContext(r);if(e===void 0)throw new Error("useAppeals must be used within an AppealsProvider");return e}export{p as A,a as u};

@@ -1,0 +1,1 @@
+import{a as t,p as s}from"./chunk-JMJ3UQ3L-pg1kTSKp.js";const e=t.createContext(void 0);function u({children:o,blogPageInfo:r,blogPosts:n}){return s.jsx(e.Provider,{value:{blogPageInfo:r,blogPosts:n},children:o})}function a(){const o=t.useContext(e);if(o===void 0)throw new Error("useBlog must be used within a BlogProvider");return o}export{u as B,a as u};

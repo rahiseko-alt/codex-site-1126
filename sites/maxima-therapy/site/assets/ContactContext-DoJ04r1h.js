@@ -1,0 +1,1 @@
+import{a as o,p as n}from"./chunk-JMJ3UQ3L-pg1kTSKp.js";const e=o.createContext(void 0);function a({children:t,contactPageInfo:r}){return n.jsx(e.Provider,{value:{contactPageInfo:r},children:t})}function c(){const t=o.useContext(e);if(t===void 0)throw new Error("useContact must be used within a ContactProvider");return t}export{a as C,c as u};

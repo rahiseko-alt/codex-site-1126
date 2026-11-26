@@ -1,0 +1,1 @@
+import{a as e,p as n}from"./chunk-JMJ3UQ3L-pg1kTSKp.js";const r=e.createContext(void 0);function i({children:t,faqPageInfo:o}){return n.jsx(r.Provider,{value:{faqPageInfo:o},children:t})}function u(){const t=e.useContext(r);if(t===void 0)throw new Error("useFAQ must be used within a FAQProvider");return t}export{i as F,u};

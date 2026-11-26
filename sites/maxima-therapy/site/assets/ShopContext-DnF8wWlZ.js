@@ -1,0 +1,1 @@
+import{a as t,p as s}from"./chunk-JMJ3UQ3L-pg1kTSKp.js";const e=t.createContext(void 0);function u({children:o,products:r,shopPageInfo:n}){return s.jsx(e.Provider,{value:{products:r,shopPageInfo:n},children:o})}function p(){const o=t.useContext(e);if(o===void 0)throw new Error("useShop must be used within a ShopProvider");return o}export{u as S,p as u};

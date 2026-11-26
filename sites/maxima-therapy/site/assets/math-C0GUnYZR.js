@@ -1,0 +1,1 @@
+function s(a){return a*Math.PI/180}function r(a,t,n){return Math.min(Math.max(a,t),n)}function p(a,t,n,c,e){return(a-t)*(e-c)/(n-t)+c}function d(a,t,n,c,e){const u=r(a,t,n);return p(u,t,n,c,e)}export{d as a,r as c,s as d,p as m};

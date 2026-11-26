@@ -1,0 +1,1 @@
+import{a as r,p as s}from"./chunk-JMJ3UQ3L-pg1kTSKp.js";const t=r.createContext(void 0);function i({children:e,termsPageInfo:o}){return s.jsx(t.Provider,{value:{termsPageInfo:o},children:e})}function u(){const e=r.useContext(t);if(e===void 0)throw new Error("useTerms must be used within a TermsProvider");return e}export{i as T,u};

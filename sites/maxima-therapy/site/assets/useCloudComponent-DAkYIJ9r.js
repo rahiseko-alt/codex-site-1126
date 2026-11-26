@@ -1,0 +1,1 @@
+import{T as d,a as e,b as p,c as u,d as a}from"./Cloud-DYqJxrwF.js";const o=[{id:"0-to-3",component:d},{id:"3-to-18",component:e},{id:"18-to-65",component:p},{id:"65-and-plus",component:u},{id:"type5",component:a}];function s(n){return(o.find(t=>t.id===n)||o[0]).component}export{o as c,s as u};

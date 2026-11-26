@@ -1,0 +1,1 @@
+import{a as r,p as n}from"./chunk-JMJ3UQ3L-pg1kTSKp.js";const o=r.createContext(void 0);function i({children:t,story:e}){return n.jsx(o.Provider,{value:{story:e},children:t})}function u(){const t=r.useContext(o);if(t===void 0)throw new Error("useStory must be used within a StoryProvider");return t}export{i as S,u};

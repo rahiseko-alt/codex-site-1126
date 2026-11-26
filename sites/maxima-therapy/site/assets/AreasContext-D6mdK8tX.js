@@ -1,0 +1,1 @@
+import{a as r,p as n}from"./chunk-JMJ3UQ3L-pg1kTSKp.js";const t=r.createContext(void 0);function i({children:e,areas:o,regionsPageInfo:s}){return n.jsx(t.Provider,{value:{areas:o,regionsPageInfo:s},children:e})}function u(){const e=r.useContext(t);if(e===void 0)throw new Error("useAreas must be used within a AreasProvider");return e}export{i as A,u};

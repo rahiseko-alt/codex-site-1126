@@ -1,0 +1,1 @@
+import{a as r,p as n}from"./chunk-JMJ3UQ3L-pg1kTSKp.js";const t=r.createContext(void 0);function i({children:o}){const[e,s]=r.useState("null");return n.jsx(t.Provider,{value:{logoColor:e,setLogoColor:s},children:o})}function l(){const o=r.useContext(t);if(o===void 0)throw new Error("useLogoColor must be used within a LogoColorProvider");return o}export{i as L,l as u};
