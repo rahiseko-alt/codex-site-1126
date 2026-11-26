@@ -25,5 +25,6 @@
 | ARK SKIN CLINIC | [sites/arkskinclinic](sites/arkskinclinic/README.md) |
 | EmCell 英語版 | [sites/emcell](sites/emcell/README.md) |
 | PP Neue Montreal | [sites/neue-montreal](sites/neue-montreal/README.md) |
+| Rive 公開サイト | [sites/rive](sites/rive/README.md) |
 
 [サイト追加のルール](docs/site-layout.md) · [開発テンプレートの資料](docs/development-template.md)
