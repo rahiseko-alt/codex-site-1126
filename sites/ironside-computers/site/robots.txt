@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /account/
+Disallow: /login
+Disallow: /register
+Disallow: /logout
+Disallow: /forgot-password
+Disallow: /change-password
+Disallow: /checkout
+Disallow: /monitoring
+
+Sitemap: https://www.ironsidecomputers.com/sitemap.xml
