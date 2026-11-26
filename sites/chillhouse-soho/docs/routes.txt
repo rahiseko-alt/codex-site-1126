@@ -1,0 +1,17 @@
+/
+/pages/spa-services
+/pages/join-club-chill
+/pages/service-face
+/pages/service-heat
+/pages/service-body
+/pages/service-nail
+/pages/services-cafe
+/pages/lookbook
+/pages/soho-chill-events
+/pages/reviews
+/pages/faq
+/pages/contact
+/pages/privacy-policy
+/pages/about-us
+/pages/careers
+/policies/privacy-policy
