@@ -1,9 +1,133 @@
+class wavyPathAnim {
+
+  constructor(hover, svg, paths) {
+
+    this.hover = hover;
+    this.duration = 2700;
+    this.svgPath = svg.querySelector('path');
+    this.status = 'pause';
+    this.paths = paths;
+    this.existingPath = this.svgPath.getAttribute('d');
+
+
+    
+    this.tl = anime.timeline({
+      duration: this.duration,
+      easing: 'linear',
+      loop: true,
+      autoplay: false
+    });
+
+
+
+    this.tl.update = (anim) => {
+      if(this.status == 'pause') {
+          if(anim.progress < 1) {
+            this.tl.pause();
+          }
+      }
+    };
+
+
+    this.tl.add({
+      targets: this.svgPath,
+      d: this.paths,
+      rotate: '60deg'
+    });
+    
+
+    this.init();
+
+  }
+
+
+  init() {
+
+    this.mouseEnter = () => {
+      this.tl.play();
+      this.status = 'play';
+
+
+
+    }
+    this.mouseLeave = () => {
+      this.status = 'pause';
+      this.tl.reverse();
+    }
+
+    this.hover.addEventListener('mouseenter', this.mouseEnter );
+    this.hover.addEventListener('mouseleave', this.mouseLeave );
+  }
+
+
+}
+
+
+if(!mobile) {
+
+  const wavyMainMenuCircle = [
+    {value: 'M 94.5 50.4 c 0 11.7 -4.6 22.4 -12.1 30.3 c -8 8.4 -19.3 13.7 -31.9 13.7 c -11.8 0 -22.5 -4.7 -30.4 -12.2 c -8.4 -8 -13.6 -19.3 -13.6 -31.8 c 0 -11.6 4.5 -22.2 11.8 -30 c 8 -8.6 19.5 -14 32.2 -14 c 13.3 0 25.3 5.9 33.5 15.6 C 90.5 29.4 94.5 39.5 94.5 50.4 z'},
+    {value: 'M 93 50 c -1.5 10.6 -4 30 -12 30 c -11.9 0.7 -16.9 14.7 -30.9 14.7 c -11.8 0 -24 -4 -30.4 -12.2 c -5.6 -12.8 -9.6 -15.8 -11.6 -31.8 c -1 -15 7 -4 11.8 -30 c 4.2 -10 16.2 -10 34.2 -9 c 17 0 24 5 31 16 C 92 34 96 39 93 50 z'},
+    {value: 'M 94.5 50.4 c -1.5 10.6 -5.5 20.6 -12.1 30.3 c -7.4 10.3 -19.3 13.7 -31.4 14.3 c -11.8 0 -22 0 -30.4 -12.2 c -5.6 -12.8 -13.6 -19.3 -13.6 -31.8 c 0 -11.6 2 -22 11.8 -30 c 11.2 -9 17.7 -16.4 32.7 -15.4 c 14 1 25.3 5.9 33.3 15.3 C 92 28 96 39 94.5 50.4 z'},
+    {value: 'M 94.5 50.4 c 0 11.7 -5.5 18.6 -12.1 30.3 c -8 8.4 -18.4 17.3 -31.9 13.7 c -11.5 -2.4 -20.5 -6.4 -30.4 -12.2 c -11.1 -5.2 -10.1 -19.2 -13.6 -31.8 c -3.5 -10.4 0.5 -25.4 11.8 -30 c 9.7 -5.4 19.5 -14 32.2 -14 c 13.3 0 26.5 2.6 33.5 15.6 C 89 33 94.5 39.5 94.5 50.4 z'},
+    {value: 'M 94.5 50.4 c 0 11.7 -4.6 22.4 -12.1 30.3 c -8 8.4 -19.3 13.7 -31.9 13.7 c -11.8 0 -22.5 -4.7 -30.4 -12.2 c -8.4 -8 -13.6 -19.3 -13.6 -31.8 c 0 -11.6 4.5 -22.2 11.8 -30 c 8 -8.6 19.5 -14 32.2 -14 c 13.3 0 25.3 5.9 33.5 15.6 C 90.5 29.4 94.5 39.5 94.5 50.4 z'}
+  ];
+
+  let wavyMainMenuBtn = new wavyPathAnim(
+    document.getElementById('mainMenuBtn'), 
+    document.getElementById('mmCircleHover'), 
+    wavyMainMenuCircle
+  );
+
+
+
+  const wavyCloseBtnPaths = [
+    {value: 'M 122.6 64.3 c 0 14.3 -5.2 27.4 -13.9 37.5 C 98.1 114.2 82.4 122 64.9 122 c -13.9 0 -26.7 -4.9 -36.7 -13.2 c -12.8 -10.6 -21 -26.6 -21 -44.5 c 0 -15.8 6.3 -30.1 16.8 -40.3 c 10.5 -10.6 25 -17.2 41.1 -17.2 c 15.9 0 30.4 6.5 40.8 16.9 C 116.1 33.9 122.6 48.4 122.6 64.3 z'},
+    {value: 'M 122.6 64.3 c 0 14.3 -5.2 27.4 -13.9 37.5 C 98.1 114.2 85 116 64.9 122 c -18.9 3 -26.7 -4.9 -36.7 -13.2 c -12.8 -10.6 -25.2 -24.8 -21 -44.5 c 6.8 -23.3 6.3 -30.1 16.6 -40.5 c 10.5 -10.6 25 -17.2 41.1 -17.2 c 15.9 0 31.1 1.4 40.8 16.9 C 115 37 122.6 48.4 122.6 64.3 z'},
+    {value: 'M 122.6 64.3 c -5.6 14.7 -1.6 29.7 -13.9 37.5 C 89 107 83 111 64.9 122 c -21.9 10 -26.9 -3 -36.7 -13.2 c -12.2 -14.8 -25.2 -24.8 -21 -44.5 c 6.8 -23.3 6.3 -30.1 16.6 -40.5 c 9.2 -13.8 24.2 -22.8 41.1 -17.2 c 19.1 5.4 26.1 -2.6 40.8 16.9 C 118 38 126 46 122.6 64.3 z'},
+    {value: 'M 122.6 64.3 c 0 14.3 -5.2 27.4 -13.9 37.5 C 98.1 114.2 82.4 122 64.9 122 c -13.9 0 -26.7 -4.9 -36.7 -13.2 c -12.8 -10.6 -21 -26.6 -21 -44.5 c 0 -15.8 6.3 -30.1 16.8 -40.3 c 10.5 -10.6 25 -17.2 41.1 -17.2 c 15.9 0 30.4 6.5 40.8 16.9 C 116.1 33.9 122.6 48.4 122.6 64.3 z'}
+  ];
+
+  let wavyCloseBtn = new wavyPathAnim(
+    document.getElementById('bookingClose'), 
+    document.getElementById('closeBtnCircleHover'), 
+    wavyCloseBtnPaths
+  );
+
+
+  // common overlay close btn
+  document.querySelectorAll('.overlay-close-btn').forEach( (el) => {
+    let svg = el.querySelector('.closeBtnCircleHover');
+    let closeBtnn = new wavyPathAnim( el, svg, wavyCloseBtnPaths );
+  } );
+  // common overlay close btn
+
+
+  const wavySendFormPaths = [
+    {value: 'M 75.5 8.9 c 17.1 0 32.8 6.4 44.6 17 c 13.7 12.3 22.4 30.1 22.4 50 c 0 17.1 -6.4 32.6 -16.9 44.5 c -12.3 13.8 -30.2 22.6 -50.1 22.6 c -15.8 0 -30.2 -5.4 -41.7 -14.5 C 18.4 116.1 8.5 97.2 8.5 75.9 c 0 -19.3 8.2 -36.7 21.5 -48.9 C 41.7 15.8 57.8 8.9 75.5 8.9 z'},
+    {value: 'M 75.5 8.9 c 17.1 0 32.8 6.4 44.6 17 c 13.7 12.3 22.4 30.1 22.4 50 c 0 17.1 -2.5 33.1 -16.9 44.5 c -17.6 9.6 -30.2 22.6 -50.1 22.6 c -15.8 0 -35.5 2 -41.7 -14.5 C 21 98 8.5 97.2 8.5 75.9 c 0 -19.3 5.5 -39.9 21.5 -48.9 C 44 18 57.8 8.9 75.5 8.9 z'},
+    {value: 'M 75.5 8.9 c 17.1 0 35.5 2.1 44.6 17 c 14.9 35.1 23.9 25.1 22.4 50 c 3.5 22.1 -6.4 32.6 -16.9 44.5 c -12.3 13.8 -29.6 26.6 -50.1 22.6 c -16.5 -4 -30.5 -6 -41.7 -14.5 C 18.4 116.1 8.5 97.2 8.5 75.9 c 0 -19.3 13.5 -31.9 21.5 -48.9 C 38 9 57.8 8.9 75.5 8.9 z'},
+    {value: 'M 75 13 c 22 1 32.8 6.4 44.6 17 c 13.7 12.3 22.4 30.1 26.4 51 c 3 18 -7 32 -14 43 c -12 16 -27.1 17.5 -50.1 15.5 c -15.8 0 -30.2 -5.4 -41.7 -14.5 C 18.4 116.1 8.5 97.2 8.5 75.9 c 0 -19.3 8.2 -36.7 21.5 -48.9 C 41.7 15.8 52 12 75 13 z'},
+    //{value: 'M 75.5 8.9 c 17.1 0 32.8 6.4 41.5 21.1 c 10 15 22.4 30.1 22.4 50 c 0 17.1 -6.4 32.6 -16.9 44.5 c -12.3 13.8 -23.5 4.5 -47.5 1.5 c -18 -6 -20 6 -46 -4 C 12 112 8.5 97.2 8.5 75.9 c 0 -19.3 8.2 -36.7 21.5 -48.9 C 41.7 15.8 57.8 8.9 75.5 8.9 z'},
+    {value: 'M 75.5 8.9 c 17.1 0 32.8 6.4 44.6 17 c 13.7 12.3 22.4 30.1 22.4 50 c 0 17.1 -6.4 32.6 -16.9 44.5 c -12.3 13.8 -30.2 22.6 -50.1 22.6 c -15.8 0 -30.2 -5.4 -41.7 -14.5 C 18.4 116.1 8.5 97.2 8.5 75.9 c 0 -19.3 8.2 -36.7 21.5 -48.9 C 41.7 15.8 57.8 8.9 75.5 8.9 z'}
+  ];
+
+  let wavySendForm = new wavyPathAnim(
+    document.getElementById('formBtn'), 
+    document.getElementById('formBtnCircle'), 
+    wavySendFormPaths
+  );
+
+}
+
+
+
+
+
 
   
 
-  if (navigator.serviceWorker) {
-    navigator.serviceWorker.register('/sw.js');
-  }
+  var headBlockHeight = window.innerHeight;
     
 
   var isMobile = {
@@ -4183,131 +4307,6 @@ setTimeout(function(){
 
 
 //// wavy blob button
-
-class wavyPathAnim {
-
-  constructor(hover, svg, paths) {
-
-    this.hover = hover;
-    this.duration = 2700;
-    this.svgPath = svg.querySelector('path');
-    this.status = 'pause';
-    this.paths = paths;
-    this.existingPath = this.svgPath.getAttribute('d');
-
-
-    
-    this.tl = anime.timeline({
-      duration: this.duration,
-      easing: 'linear',
-      loop: true,
-      autoplay: false
-    });
-
-
-
-    this.tl.update = (anim) => {
-      if(this.status == 'pause') {
-          if(anim.progress < 1) {
-            this.tl.pause();
-          }
-      }
-    };
-
-
-    this.tl.add({
-      targets: this.svgPath,
-      d: this.paths,
-      rotate: '60deg'
-    });
-    
-
-    this.init();
-
-  }
-
-
-  init() {
-
-    this.mouseEnter = () => {
-      this.tl.play();
-      this.status = 'play';
-
-
-
-    }
-    this.mouseLeave = () => {
-      this.status = 'pause';
-      this.tl.reverse();
-    }
-
-    this.hover.addEventListener('mouseenter', this.mouseEnter );
-    this.hover.addEventListener('mouseleave', this.mouseLeave );
-  }
-
-
-}
-
-
-if(!mobile) {
-
-  const wavyMainMenuCircle = [
-    {value: 'M 94.5 50.4 c 0 11.7 -4.6 22.4 -12.1 30.3 c -8 8.4 -19.3 13.7 -31.9 13.7 c -11.8 0 -22.5 -4.7 -30.4 -12.2 c -8.4 -8 -13.6 -19.3 -13.6 -31.8 c 0 -11.6 4.5 -22.2 11.8 -30 c 8 -8.6 19.5 -14 32.2 -14 c 13.3 0 25.3 5.9 33.5 15.6 C 90.5 29.4 94.5 39.5 94.5 50.4 z'},
-    {value: 'M 93 50 c -1.5 10.6 -4 30 -12 30 c -11.9 0.7 -16.9 14.7 -30.9 14.7 c -11.8 0 -24 -4 -30.4 -12.2 c -5.6 -12.8 -9.6 -15.8 -11.6 -31.8 c -1 -15 7 -4 11.8 -30 c 4.2 -10 16.2 -10 34.2 -9 c 17 0 24 5 31 16 C 92 34 96 39 93 50 z'},
-    {value: 'M 94.5 50.4 c -1.5 10.6 -5.5 20.6 -12.1 30.3 c -7.4 10.3 -19.3 13.7 -31.4 14.3 c -11.8 0 -22 0 -30.4 -12.2 c -5.6 -12.8 -13.6 -19.3 -13.6 -31.8 c 0 -11.6 2 -22 11.8 -30 c 11.2 -9 17.7 -16.4 32.7 -15.4 c 14 1 25.3 5.9 33.3 15.3 C 92 28 96 39 94.5 50.4 z'},
-    {value: 'M 94.5 50.4 c 0 11.7 -5.5 18.6 -12.1 30.3 c -8 8.4 -18.4 17.3 -31.9 13.7 c -11.5 -2.4 -20.5 -6.4 -30.4 -12.2 c -11.1 -5.2 -10.1 -19.2 -13.6 -31.8 c -3.5 -10.4 0.5 -25.4 11.8 -30 c 9.7 -5.4 19.5 -14 32.2 -14 c 13.3 0 26.5 2.6 33.5 15.6 C 89 33 94.5 39.5 94.5 50.4 z'},
-    {value: 'M 94.5 50.4 c 0 11.7 -4.6 22.4 -12.1 30.3 c -8 8.4 -19.3 13.7 -31.9 13.7 c -11.8 0 -22.5 -4.7 -30.4 -12.2 c -8.4 -8 -13.6 -19.3 -13.6 -31.8 c 0 -11.6 4.5 -22.2 11.8 -30 c 8 -8.6 19.5 -14 32.2 -14 c 13.3 0 25.3 5.9 33.5 15.6 C 90.5 29.4 94.5 39.5 94.5 50.4 z'}
-  ];
-
-  let wavyMainMenuBtn = new wavyPathAnim(
-    document.getElementById('mainMenuBtn'), 
-    document.getElementById('mmCircleHover'), 
-    wavyMainMenuCircle
-  );
-
-
-
-  const wavyCloseBtnPaths = [
-    {value: 'M 122.6 64.3 c 0 14.3 -5.2 27.4 -13.9 37.5 C 98.1 114.2 82.4 122 64.9 122 c -13.9 0 -26.7 -4.9 -36.7 -13.2 c -12.8 -10.6 -21 -26.6 -21 -44.5 c 0 -15.8 6.3 -30.1 16.8 -40.3 c 10.5 -10.6 25 -17.2 41.1 -17.2 c 15.9 0 30.4 6.5 40.8 16.9 C 116.1 33.9 122.6 48.4 122.6 64.3 z'},
-    {value: 'M 122.6 64.3 c 0 14.3 -5.2 27.4 -13.9 37.5 C 98.1 114.2 85 116 64.9 122 c -18.9 3 -26.7 -4.9 -36.7 -13.2 c -12.8 -10.6 -25.2 -24.8 -21 -44.5 c 6.8 -23.3 6.3 -30.1 16.6 -40.5 c 10.5 -10.6 25 -17.2 41.1 -17.2 c 15.9 0 31.1 1.4 40.8 16.9 C 115 37 122.6 48.4 122.6 64.3 z'},
-    {value: 'M 122.6 64.3 c -5.6 14.7 -1.6 29.7 -13.9 37.5 C 89 107 83 111 64.9 122 c -21.9 10 -26.9 -3 -36.7 -13.2 c -12.2 -14.8 -25.2 -24.8 -21 -44.5 c 6.8 -23.3 6.3 -30.1 16.6 -40.5 c 9.2 -13.8 24.2 -22.8 41.1 -17.2 c 19.1 5.4 26.1 -2.6 40.8 16.9 C 118 38 126 46 122.6 64.3 z'},
-    {value: 'M 122.6 64.3 c 0 14.3 -5.2 27.4 -13.9 37.5 C 98.1 114.2 82.4 122 64.9 122 c -13.9 0 -26.7 -4.9 -36.7 -13.2 c -12.8 -10.6 -21 -26.6 -21 -44.5 c 0 -15.8 6.3 -30.1 16.8 -40.3 c 10.5 -10.6 25 -17.2 41.1 -17.2 c 15.9 0 30.4 6.5 40.8 16.9 C 116.1 33.9 122.6 48.4 122.6 64.3 z'}
-  ];
-
-  let wavyCloseBtn = new wavyPathAnim(
-    document.getElementById('bookingClose'), 
-    document.getElementById('closeBtnCircleHover'), 
-    wavyCloseBtnPaths
-  );
-
-
-  // common overlay close btn
-  document.querySelectorAll('.overlay-close-btn').forEach( (el) => {
-    let svg = el.querySelector('.closeBtnCircleHover');
-    let closeBtnn = new wavyPathAnim( el, svg, wavyCloseBtnPaths );
-  } );
-  // common overlay close btn
-
-
-  const wavySendFormPaths = [
-    {value: 'M 75.5 8.9 c 17.1 0 32.8 6.4 44.6 17 c 13.7 12.3 22.4 30.1 22.4 50 c 0 17.1 -6.4 32.6 -16.9 44.5 c -12.3 13.8 -30.2 22.6 -50.1 22.6 c -15.8 0 -30.2 -5.4 -41.7 -14.5 C 18.4 116.1 8.5 97.2 8.5 75.9 c 0 -19.3 8.2 -36.7 21.5 -48.9 C 41.7 15.8 57.8 8.9 75.5 8.9 z'},
-    {value: 'M 75.5 8.9 c 17.1 0 32.8 6.4 44.6 17 c 13.7 12.3 22.4 30.1 22.4 50 c 0 17.1 -2.5 33.1 -16.9 44.5 c -17.6 9.6 -30.2 22.6 -50.1 22.6 c -15.8 0 -35.5 2 -41.7 -14.5 C 21 98 8.5 97.2 8.5 75.9 c 0 -19.3 5.5 -39.9 21.5 -48.9 C 44 18 57.8 8.9 75.5 8.9 z'},
-    {value: 'M 75.5 8.9 c 17.1 0 35.5 2.1 44.6 17 c 14.9 35.1 23.9 25.1 22.4 50 c 3.5 22.1 -6.4 32.6 -16.9 44.5 c -12.3 13.8 -29.6 26.6 -50.1 22.6 c -16.5 -4 -30.5 -6 -41.7 -14.5 C 18.4 116.1 8.5 97.2 8.5 75.9 c 0 -19.3 13.5 -31.9 21.5 -48.9 C 38 9 57.8 8.9 75.5 8.9 z'},
-    {value: 'M 75 13 c 22 1 32.8 6.4 44.6 17 c 13.7 12.3 22.4 30.1 26.4 51 c 3 18 -7 32 -14 43 c -12 16 -27.1 17.5 -50.1 15.5 c -15.8 0 -30.2 -5.4 -41.7 -14.5 C 18.4 116.1 8.5 97.2 8.5 75.9 c 0 -19.3 8.2 -36.7 21.5 -48.9 C 41.7 15.8 52 12 75 13 z'},
-    //{value: 'M 75.5 8.9 c 17.1 0 32.8 6.4 41.5 21.1 c 10 15 22.4 30.1 22.4 50 c 0 17.1 -6.4 32.6 -16.9 44.5 c -12.3 13.8 -23.5 4.5 -47.5 1.5 c -18 -6 -20 6 -46 -4 C 12 112 8.5 97.2 8.5 75.9 c 0 -19.3 8.2 -36.7 21.5 -48.9 C 41.7 15.8 57.8 8.9 75.5 8.9 z'},
-    {value: 'M 75.5 8.9 c 17.1 0 32.8 6.4 44.6 17 c 13.7 12.3 22.4 30.1 22.4 50 c 0 17.1 -6.4 32.6 -16.9 44.5 c -12.3 13.8 -30.2 22.6 -50.1 22.6 c -15.8 0 -30.2 -5.4 -41.7 -14.5 C 18.4 116.1 8.5 97.2 8.5 75.9 c 0 -19.3 8.2 -36.7 21.5 -48.9 C 41.7 15.8 57.8 8.9 75.5 8.9 z'}
-  ];
-
-  let wavySendForm = new wavyPathAnim(
-    document.getElementById('formBtn'), 
-    document.getElementById('formBtnCircle'), 
-    wavySendFormPaths
-  );
-
-}
-
-
-
 
 //// end of wavy blob button
 
