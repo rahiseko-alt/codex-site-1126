@@ -13,5 +13,13 @@
 | Ironside Computers | [sites/ironside-computers](sites/ironside-computers/README.md) |
 | Bohdan Ratiiev ポートフォリオ | [sites/bratiiev](sites/bratiiev/README.md) |
 | Eliza Doltu ポートフォリオ | [sites/eliza-doltu](sites/eliza-doltu/README.md) |
+| Nail Salon Cotty | [sites/nail-cotty](sites/nail-cotty/README.md) |
+| Longleage | [sites/longleage](sites/longleage/README.md) |
+| Paintbox | [sites/paint-box](sites/paint-box/README.md) |
+| Townhouse | [sites/townhouse](sites/townhouse/README.md) |
+| EVER | [sites/ever](sites/ever/README.md) |
+| Chillhouse Soho | [sites/chillhouse-soho](sites/chillhouse-soho/README.md) |
+| Tenoverten | [sites/tenoverten](sites/tenoverten/README.md) |
+| A Twosome Place の取得状況 | [sites/twosome](sites/twosome/README.md) |
 
 [サイト追加のルール](docs/site-layout.md) · [開発テンプレートの資料](docs/development-template.md)
