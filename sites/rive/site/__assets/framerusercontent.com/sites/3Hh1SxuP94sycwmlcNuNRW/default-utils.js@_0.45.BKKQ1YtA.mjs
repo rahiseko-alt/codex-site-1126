@@ -1,0 +1,2 @@
+import{t as e}from"./rolldown-runtime.Bi-D_2cA.mjs";import{s as t}from"./shared.GGU3rNur.mjs";function n(){return(n=e((()=>{t()})))()}export{n as t};
+//# sourceMappingURL=default-utils.js@_0.45.BKKQ1YtA.mjs.map
