@@ -1,0 +1,8 @@
+# ARK SKIN CLINIC 検証記録
+
+WordPress の公開 HTML、テーマ CSS・JavaScript、サイトマップを確認した。元サイトで読み込めない場合があった一部の素材は同じ配信先を参照する。
+
+PCとスマートフォンのトップでは、左に元サイト、右に公開版を掲載する。
+
+- [PC 1440×900](qa/desktop-home.webp)
+- [スマートフォン 390×844](qa/mobile-home.webp)

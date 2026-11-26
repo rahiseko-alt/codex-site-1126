@@ -1,0 +1,810 @@
+@charset "UTF-8";
+/* ===================================
+一覧
+=================================== */
+.c-pagettl .c-ttl img[src*=skin] {
+  width: 163px;
+}
+.c-pagettl .c-ttl img[src*=cosme] {
+  width: 459px;
+}
+.c-pagettl .c-ttl img[src*=medicine] {
+  width: 589px;
+}
+.c-pagettl .c-ttl img[src*=injection] {
+  width: 383px;
+}
+
+.c-sideimg {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.c-sideimg .c-imgarea {
+  width: 400px;
+}
+.c-sideimg .c-imgarea .c-img {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+}
+.c-sideimg .c-imgarea .p-top {
+  position: absolute;
+  top: 0;
+  right: -80px;
+  width: 400px;
+}
+.c-sideimg .c-imgarea .p-bottom {
+  padding-top: 80px;
+  position: relative;
+}
+.c-sideimg .c-list_area {
+  width: calc(100% - 470px);
+  margin: 0 auto 0 0;
+}
+
+	/* ブライダルページ：メニューが少なくても画像とかぶらないように高さを確保 */
+.c-sideimg.bridal .c-list_area {
+  min-height: 650px;
+}
+
+
+/* 外科手術ページ：メニューが少なくても画像とかぶらないように高さを確保 */
+.c-sideimg.surgery .c-list_area {
+  min-height: 650px;
+}
+/* 外科手術ページ：メニューが少なくても画像とかぶらないように高さを確保 */
+.c-sideimg.surgery_y .c-list_area {
+  min-height: 650px;
+}
+
+
+
+.c-pagettl + .c-cat_wrap {
+  margin-top: 70px;
+}
+
+.c-cat_wrap .c-cat_ttl {
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 5px;
+}
+.c-cat_wrap .c-postlist {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 1.3;
+}
+.c-cat_wrap .c-postlist li {
+  width: 50%;
+  margin-bottom: 10px;
+  padding-right: 10px;
+}
+.c-cat_wrap .c-postlist li a {
+  transition: 0.5s;
+}
+.c-cat_wrap .c-postlist li a:hover {
+  opacity: 0.5;
+}
+
+.c-cat_wrap + .c-cat_wrap {
+  margin-top: 45px;
+}
+
+@media screen and (max-width: 1450px) {
+  .c-sideimg .c-imgarea .p-top {
+    right: -20px;
+    width: 380px;
+  }
+  .c-sideimg .c-imgarea .p-bottom {
+    width: 380px;
+    padding-top: 40px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .c-sideimg .c-imgarea {
+    width: 350px;
+  }
+  .c-sideimg .c-imgarea .p-top {
+    width: 320px;
+  }
+  .c-sideimg .c-imgarea .p-bottom {
+    width: 320px;
+  }
+  .c-sideimg .c-list_area {
+    width: calc(100% - 380px);
+  }
+}
+@media screen and (max-width: 767px) {
+  .c-sideimg {
+    display: block !important;
+  }
+  .c-sideimg .c-pagettl {
+    margin-bottom: 30px;
+  }
+  .c-sideimg .c-imgarea {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .c-sideimg .c-imgarea .c-img {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .c-sideimg .c-imgarea .p-top {
+    width: 80%;
+  }
+  .c-sideimg .c-imgarea .p-bottom {
+    width: 80%;
+  }
+  .c-sideimg .c-list_area {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .c-pagettl .c-ttl img[src*=skin] {
+    width: 114px;
+  }
+  .c-pagettl .c-ttl img[src*=cosme] {
+    width: 321px;
+  }
+  .c-pagettl .c-ttl img[src*=medicine] {
+    width: 412px;
+  }
+  .c-pagettl .c-ttl img[src*=injection] {
+    width: 268px;
+  }
+  .c-cat_wrap .c-postlist li {
+    width: 100%;
+  }
+}
+/* ===================================
+詳細
+=================================== */
+.c-menu_single {
+  margin-top: 55px;
+  display: flex;
+  justify-content: space-between;
+}
+.c-menu_single .c-content {
+  width: calc(100% - 360px);
+}
+
+.c-pagettl_wrap {
+  width: 360px;
+}
+.c-pagettl_wrap > div {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 120px;
+}
+.c-pagettl_wrap .c-cat {
+  font-size: 12px;
+  color: #bbb;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+.c-pagettl_wrap .c-ttl {
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.c-editwrap h2 {
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+  font-weight: 500;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+.c-editwrap h3 {
+  font-size: 18px;
+  font-weight: 500;
+  position: relative;
+}
+.c-editwrap h3:before {
+  content: none;
+  padding-right: 5px;
+  color: #e6e6e6;
+}
+.c-editwrap h4 {
+  font-size: 16px;
+  font-weight: 500;
+}
+.c-editwrap h5, .c-editwrap h6 {
+  font-weight: 500;
+}
+.c-editwrap p {
+  font-size: 14px;
+  line-height: 2.1;
+  font-weight: 100;
+}
+.c-editwrap .wp-block-image {
+  margin: 20px 0;
+}
+.c-editwrap h2 + p, .c-editwrap h3 + p, .c-editwrap h4 + p, .c-editwrap h5 + p, .c-editwrap h6 + p {
+  margin-top: 0;
+}
+.c-editwrap p + p, .c-editwrap h2 + h3 {
+  margin-top: 20px;
+}
+.c-editwrap p + h3 {
+  margin-top: 35px;
+}
+.c-editwrap p + h2 {
+  margin-top: 20px;
+}
+.c-editwrap h3 + h4, .c-editwrap h4 + h5, .c-editwrap h5 + h6, .c-editwrap p + h4, .c-editwrap p + h5, .c-editwrap p + h6 {
+  margin-top: 10px;
+}
+.c-editwrap .wp-block-image img {
+  max-width: none;
+  width: 100%;
+}
+
+.c-editwrap .c-pricelist .c-ttl {
+  border-bottom: none;
+}
+
+.c-editwrap + .c-editwrap {
+  margin-top: 45px;
+}
+
+.c-caselist {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.c-caselist li {
+  width: calc((100% - 35px) / 2);
+}
+.c-caselist li:nth-of-type(even) {
+  margin-left: 35px;
+}
+.c-caselist .c-ttlarea {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  font-weight: 100;
+  margin-top: 15px;
+}
+.c-caselist .c-text {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.c-reclist {
+  margin-top: 14px;
+}
+
+.c-reclist li {
+  font-size: 14px;
+  line-height: 1.7;
+  position: relative;
+  padding-left: 20px;
+}
+.c-reclist li + li {
+  margin-top: 10px;
+}
+
+.c-reclist li:before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #333;
+  border-radius: 50%;
+  position: absolute;
+  top: 9px;
+  left: 5px;
+}
+
+.c-formlist {
+  margin-top: 20px;
+}
+
+.c-formlist li {
+  display: flex;
+  align-items: center;
+}
+.c-formlist li + li {
+  margin-top: 20px;
+}
+.c-formlist li .c-img {
+  width: 300px;
+}
+.c-formlist li .c-textarea {
+  width: calc(100% - 300px);
+  margin-left: 20px;
+}
+.c-formlist li .c-ttl {
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+  padding-left: 25px;
+}
+.c-formlist li .c-ttl:before {
+  content: "";
+  width: 20px;
+  height: 1px;
+  background: #ddd;
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+.c-formlist li .c-text {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-top: 10px;
+}
+
+.c-featurelist {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 1.7;
+}
+.c-featurelist > div {
+  display: flex;
+}
+.c-featurelist > div + div {
+  margin-top: 20px;
+}
+.c-featurelist dt {
+  font-weight: 500;
+  width: 170px;
+}
+.c-featurelist dd {
+  width: calc(100% - 170px);
+}
+
+.c-flowlist {
+  margin-top: 20px;
+}
+
+.c-flowlist li {
+  position: relative;
+  padding-left: 45px;
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 1.7;
+}
+.c-flowlist li + li {
+  margin-top: 30px;
+}
+.c-flowlist li .num {
+  width: 30px;
+  height: 30px;
+  background: #333;
+  font-size: 14px;
+  font-weight: 100;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .c-pagettl_wrap {
+    width: 300px;
+  }
+  .c-menu_single .c-content {
+    width: calc(100% - 300px);
+  }
+  .c-menu_single .c-content {
+    width: calc(100% - 300px);
+  }
+  .c-formlist li .c-img {
+    width: 200px;
+  }
+  .c-formlist li .c-textarea {
+    width: calc(100% - 200px);
+    margin-left: 20px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .c-menu_single {
+    display: block;
+  }
+  .c-pagettl_wrap {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .c-menu_single .c-content {
+    width: 100%;
+  }
+  .c-pagettl_wrap .c-ttl {
+    font-size: 22px;
+  }
+  .c-formlist li {
+    display: block;
+  }
+  .c-formlist li .c-img {
+    width: 100%;
+  }
+  .c-formlist li .c-textarea {
+    width: 100%;
+    margin: 20px 0 0;
+  }
+  .c-caselist {
+    display: block;
+  }
+  .c-caselist li {
+    width: 100%;
+  }
+  .c-caselist li + li {
+    margin: 20px 0 0 !important;
+  }
+  .c-featurelist > div {
+    display: block;
+  }
+  .c-featurelist dt,
+.c-featurelist dd {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .c-editwrap h2 {
+    font-size: 16px;
+  }
+}
+/* ===================================
+料金表
+=================================== */
+.c-top_area {
+  background: #f6f6f6;
+  margin-top: 75px;
+  text-align: center;
+  padding: 30px 0 35px;
+  font-size: 14px;
+  line-height: 2.1;
+  font-weight: 100;
+}
+.c-top_area a {
+  text-decoration: underline;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.c-top_area a:hover {
+  opacity: 0.5;
+}
+.c-top_area .c-ttl {
+  font-family: "Noto Serif JP", serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.c-link_list {
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
+  margin-top: 60px;
+  padding: 35px 10px;
+}
+.c-link_list ul {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 100;
+}
+.c-link_list ul li a {
+  padding: 0 25px 0 0;
+  position: relative;
+  transition: 0.5s;
+}
+.c-link_list ul li a:hover {
+  opacity: 0.5;
+}
+.c-link_list ul li a::after {
+  content: "";
+  width: 9px;
+  height: 15px;
+  background: url("/wp-content/themes/wp-ark/img/common/ico_yazi.png");
+  position: absolute;
+  top: 3px;
+  right: 8px;
+  background-size: 100%;
+}
+.c-link_list ul li + li {
+  margin-left: 40px;
+}
+
+.c-link_list + .c-list_ttl {
+  padding-top: 180px;
+  margin-top: -180px;
+}
+
+.c-list_ttl span {
+  display: block;
+  font-size: 20px;
+  position: relative;
+  font-family: "Noto Serif JP", serif;
+  padding-left: 40px;
+  padding-top: 50px;
+}
+.c-list_ttl span::before {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: #000;
+  position: absolute;
+  top: calc(50% + 25px);
+  left: 0;
+}
+
+.c-pricelist {
+  margin-top: 45px;
+}
+.c-pricelist .c-ttl {
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 3px;
+  margin-bottom: 20px;
+}
+.c-pricelist .c-label {
+  font-size: 12px;
+  padding: 1px 5px;
+  margin-left: 20px;
+  border: 1px solid #333;
+}
+.c-pricelist > .c-item + .c-item {
+  margin-top: 50px;
+}
+
+.c-list_ttl {
+  padding-top: 130px;
+  margin-top: -130px;
+}
+
+.c-pricelist + h2 span {
+  margin-top: 60px;
+}
+
+.c-inlistarea {
+  font-size: 14px;
+  font-weight: 100;
+}
+.c-inlistarea .c-ttl {
+  border: none;
+  font-size: 14px;
+  font-weight: 100;
+  background: #333 !important;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.c-inlist > div {
+  display: flex;
+  background: #f3f3f3;
+}
+.c-inlist > div:nth-of-type(odd) {
+  background: #e6e6e6;
+}
+.c-inlist > div dt {
+  width: calc(100% - 280px);
+  padding: 7px 13px;
+}
+.c-inlist > div dd {
+  width: 140px;
+  padding: 7px 13px;
+  text-align: right;
+}
+
+.c-infotext {
+  margin-top: 15px;
+}
+.c-infotext p {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.c-infotext a {
+  text-decoration: underline;
+  transition: 0.5s;
+}
+.c-infotext a:hover {
+  opacity: 0.5;
+}
+
+.overlay.sukashi {
+  background: no-repeat;
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+}
+
+.close {
+  top: 70px;
+}
+
+body.fixed {
+  overflow: hidden;
+}
+
+.popup1.modal {
+  max-width: 800px;
+  max-height: 90vh;
+  background: #fff;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+  padding: 130px 75px 50px;
+  overflow: auto;
+}
+.popup1.modal .pop_ttl {
+  font-size: 26px;
+  font-weight: 500;
+}
+.popup1.modal .pop_text {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 1.7;
+  margin-top: 40px;
+}
+.popup1.modal .b-ttl, .popup1.modal .pop_text h1 {
+  font-size: 18px;
+  font-weight: 500;
+  border-bottom: 1px solid #dddddd;
+  margin-top: 40px;
+  padding-bottom: 3px;
+}
+.popup1.modal .b-ttl + div, .popup1.modal .pop_text h1 + div {
+  padding-top: 25px;
+}
+.popup1.modal .text {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 1.7;
+  padding-top: 25px;
+}
+.popup1.modal .text span,
+.popup1.modal .pop_text h2 {
+  font-size: 16px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.top_list {
+  position: fixed;
+  left: 0;
+  z-index: 50;
+  width: 100%;
+  background: #fff;
+  top: 45px;
+}
+
+.c-link_list + .c-pricetext {
+  font-size: 14px;
+  padding-top: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+  .c-link_list ul li + li {
+    margin-left: 30px;
+  }
+  .popup1.modal {
+    max-width: 80vw;
+    padding: 80px 30px 50px;
+  }
+  .close {
+    top: 40px;
+  }
+}
+@media screen and (max-width: 780px) {
+  .top_list {
+    top: 26px;
+  }
+  .top_list .c-link_list {
+    padding: 10px 20px 0;
+  }
+  .top_list .c-link_list {
+    padding: 10px 20px 0;
+    flex-wrap: nowrap;
+    overflow: auto;
+    word-break: break-all;
+    white-space: nowrap;
+  }
+  .top_list .c-link_list ul {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+  .top_list .c-link_list ul li {
+    padding: 0 15px;
+    width: 100%;
+  }
+  .c-link_list ul li {
+    width: 50%;
+    margin: 10px 0 !important;
+  }
+  .c-link_list ul {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 600px) {
+  .c-link_list {
+    margin-top: 40px;
+    padding: 15px 10px;
+  }
+  .c-top_area .c-ttl {
+    font-size: 18px;
+  }
+  .c-top_area {
+    margin-top: 50px;
+  }
+  .c-list_ttl span {
+    font-size: 18px;
+  }
+  .c-inlistarea,
+.c-inlistarea .c-ttl {
+    font-size: 12px;
+  }
+  .c-inlist {
+    overflow: auto;
+  }
+  .c-inlist > div {
+    min-width: 400px;
+  }
+  .c-inlist > div dd {
+    width: 110px;
+    min-width: 110px;
+    padding: 5px 10px;
+  }
+  .c-inlist > div dt {
+    width: calc(100% - 220px);
+    min-width: 180px;
+    padding: 5px 10px;
+  }
+  .popup1.modal {
+    max-width: 90vw;
+    padding: 60px 20px 50px;
+  }
+  .popup1.modal .pop_ttl {
+    font-size: 22px;
+  }
+  .close {
+    top: 30px;
+  }
+  .popup1.modal .pop_text {
+    font-size: 13px;
+  }
+  .popup1.modal .b-ttl,
+.popup1.modal .pop_text h1 {
+    margin-top: 30px;
+    font-size: 16px;
+  }
+  .popup1.modal .text span,
+.popup1.modal .text .pop_text h2 {
+    font-size: 14px;
+  }
+  .popup1.modal .text {
+    font-size: 13px;
+  }
+  .c-pricelist {
+    margin-top: 25px;
+  }
+  .c-pricelist + h2 span {
+    margin-top: 30px;
+  }
+  .c-top_area {
+    text-align: left;
+  }
+  .c-list_ttl {
+    padding-top: 100px;
+    margin-top: -100px;
+  }
+  .c-link_list + .c-list_ttl {
+    padding-top: 130px;
+    margin-top: -130px;
+  }
+	
+
+	
+	
+	
+}
+@media screen and (max-width: 420px) {
+  .c-link_list ul li {
+    width: 100%;
+  }
+	
+	
+}
+
