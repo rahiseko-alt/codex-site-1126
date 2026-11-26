@@ -8,5 +8,6 @@
 | Christen Dijoux ポートフォリオ | [sites/christen-dijoux](sites/christen-dijoux/README.md) |
 | Slate マーケティングサイト | [sites/slate-teams](sites/slate-teams/README.md) |
 | MindMarket | [sites/mindmarket](sites/mindmarket/README.md) |
+| Telescope ランディングページ | [sites/telescope](sites/telescope/README.md) |
 
 [サイト追加のルール](docs/site-layout.md) · [開発テンプレートの資料](docs/development-template.md)
