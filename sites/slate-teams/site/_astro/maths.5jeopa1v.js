@@ -1,0 +1,1 @@
+var e=(e,t,n,r,i)=>(i-e)/(t-e)*(r-n)+n,t=(e,t,n)=>Math.max(e,Math.min(n,t)),n=(e,n,r)=>t(0,1,(r-e)/(n-e));export{e as n,n as r,t};

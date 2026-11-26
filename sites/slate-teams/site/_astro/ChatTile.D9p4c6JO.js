@@ -1,0 +1,1 @@
+import{n as e}from"./intercom.Bvcow3_5.js?dpl=dpl_FjmTLwf5F2McBsao1XdPpALuZAV7";var t=class extends HTMLElement{connectedCallback(){this.querySelector(`button`)?.addEventListener(`click`,()=>{e()})}};customElements.define(`c-chat-tile`,t);export{t as default};
