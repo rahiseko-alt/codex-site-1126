@@ -17,33 +17,36 @@ var grotesk []byte
 var mono []byte
 
 const (
-	ink   = 0xFF111311
-	paper = 0xFFF1F0E8
-	muted = 0xFFABAEA3
-	line  = 0xFF343831
+	ink   = 0xFF080A13
+	paper = 0xFFF7F7FF
+	muted = 0xFF9B9FB8
+	line  = 0xFF252940
 )
 
 type study struct {
 	name, legend string
 	accent       uint32
+	colors       [3]uint32
 }
 
 var studies = []study{
-	{"Orbit", "ROTATION  /  TOROIDAL FIELD", 0xFFE0F94D},
-	{"Wave", "INTERFERENCE  /  WAVE FIELD", 0xFFFF8E73},
-	{"Mesh", "DEFORMATION  /  CONTOUR FIELD", 0xFF8BE8F2},
+	{"Orbit", "LOOPS OF LIGHT", 0xFFBFA5FF, [3]uint32{0xFF4878FF, 0xFF9C67FF, 0xFFFF61C4}},
+	{"Wave", "AURORA RIBBONS", 0xFFA2F4F0, [3]uint32{0xFF2568FF, 0xFF54DBC6, 0xFFBDFFAD}},
+	{"Mesh", "RADIANT PETALS", 0xFFFFAACD, [3]uint32{0xFF855EFF, 0xFFFF508E, 0xFFFFAD72}},
 }
 
 type frame struct{ x, y, w, h float64 }
 
 type scene struct {
-	board         *builder.ArtboardBuilder
-	sans, mono    *builder.FontRef
-	visible       [3][]builder.AnimTarget
-	paths         [3][]*builder.PathRef
-	buttons       [3]*builder.ShapeRef
-	buttonLabels  [3]*builder.TextRef
-	buttonNumbers [3]*builder.TextRef
+	board                   *builder.ArtboardBuilder
+	sans, mono              *builder.FontRef
+	visible                 [3][]builder.AnimTarget
+	paths                   [3][]*builder.PathRef
+	buttons                 [3]*builder.ShapeRef
+	buttonLabels            [3]*builder.TextRef
+	buttonNumbers           [3]*builder.TextRef
+	sparks                  [3][]*builder.ShapeRef
+	centerX, centerY, scale float64
 }
 
 func rect(board *builder.ArtboardBuilder, x, y, w, h float64, color uint32) *builder.ShapeRef {
@@ -81,10 +84,10 @@ func (s *scene) chrome(w, h float64, mobile bool) frame {
 	s.rule(gutter, 77, w-gutter, 77, line)
 
 	if mobile {
-		s.text("INTERACTIVE MOTION STUDIES", 24, 103, 10.5, studies[0].accent, true, 0)
-		s.text("FIELD", 20, 124, 76, paper, false, 700)
+		s.text("INTERACTIVE LIGHT STUDIES", 24, 103, 10.5, studies[0].accent, true, 0)
+		s.text("LIGHT", 20, 124, 76, paper, false, 700)
 		s.text("STUDIES", 20, 192, 76, paper, false, 700)
-		s.text("Three fields, three ways to move.", 24, 283, 16, muted, false, 0)
+		s.text("Light in motion.", 24, 283, 16, muted, false, 0)
 		s.addButtons(24, 324, w-48, 54, true)
 		s.rule(24, 810, w-24, 810, line)
 		s.text("FIELD STUDIES", 24, 827, 11, paper, true, 0)
@@ -92,11 +95,11 @@ func (s *scene) chrome(w, h float64, mobile bool) frame {
 		return frame{24, 396, w - 48, 389}
 	}
 
-	s.text("INTERACTIVE MOTION STUDIES", 64, 200, 14, studies[0].accent, true, 0)
-	s.text("FIELD", 55, 231, 134, paper, false, 700)
+	s.text("INTERACTIVE LIGHT STUDIES", 64, 200, 14, studies[0].accent, true, 0)
+	s.text("LIGHT", 55, 231, 134, paper, false, 700)
 	s.text("STUDIES", 55, 344, 134, paper, false, 700)
-	s.text("Three fields, three ways to move.", 64, 522, 25, paper, false, 0)
-	s.text("Select a study to explore its motion.", 64, 560, 17, muted, false, 0)
+	s.text("Light in motion.", 64, 522, 25, paper, false, 0)
+	s.text("Choose a study to change the light.", 64, 560, 17, muted, false, 0)
 	s.addButtons(64, 619, 504, 62, false)
 	s.rule(64, h-62, w-64, h-62, line)
 	s.text("FIELD STUDIES", 64, h-45, 12, paper, true, 0)
@@ -109,7 +112,7 @@ func (s *scene) addButtons(x, y, w, h float64, mobile bool) {
 	bw := (w - 2*gap) / 3
 	for i, mode := range studies {
 		left := x + float64(i)*(bw+gap)
-		s.buttons[i] = rect(s.board, left, y, bw, h, 0xFF1C201C).
+		s.buttons[i] = rect(s.board, left, y, bw, h, 0xFF171B2D).
 			CornerRadius(7).Name(mode.name + " control")
 		s.buttonNumbers[i] = s.text(fmt.Sprintf("%02d", i+1), left+12, y+9, 10, muted, true, 0)
 		size := 19.0
@@ -120,77 +123,163 @@ func (s *scene) addButtons(x, y, w, h float64, mobile bool) {
 	}
 }
 
+func alpha(color uint32, opacity uint32) uint32 {
+	return color&0xFFFFFF | opacity<<24
+}
+
+func (s *scene) track(mode int, item builder.AnimTarget) {
+	s.visible[mode] = append(s.visible[mode], item)
+}
+
 func (s *scene) drawPanel(f frame, mobile bool) {
-	bg := rect(s.board, f.x, f.y, f.w, f.h, 0xFF1A1E19)
-	bg.CornerRadius(9).Stroke(1, line)
-	for x := f.x + 19; x < f.x+f.w-8; x += 27 {
-		for y := f.y + 73; y < f.y+f.h-51; y += 27 {
-			s.board.Ellipse(x, y, 2, 2).Fill(0xFF374137)
-		}
-	}
-	s.rule(f.x+19, f.y+54, f.x+f.w-19, f.y+54, line)
-	s.rule(f.x+19, f.y+f.h-48, f.x+f.w-19, f.y+f.h-48, line)
-	cx, cy := f.x+f.w/2, f.y+f.h*.508
-	scale := math.Min(f.w/480, f.h/500)
-	s.rule(cx-9, cy, cx+9, cy, 0xFF5B6356)
-	s.rule(cx, cy-9, cx, cy+9, 0xFF5B6356)
+	rect(s.board, f.x, f.y, f.w, f.h, 0xFF0B0E1C).CornerRadius(10).Stroke(1, line)
+	s.centerX, s.centerY = f.x+f.w/2, f.y+f.h*.52
+	s.scale = .94 * math.Min(f.w/546, f.h/465)
+	cx, cy, scale := s.centerX, s.centerY, s.scale
+
 	for i, mode := range studies {
-		headline := s.text(fmt.Sprintf("STUDY / %02d", i+1), f.x+19, f.y+18, 13, mode.accent, true, 0)
-		s.visible[i] = append(s.visible[i], headline)
-		label := s.text(mode.legend, f.x+19, f.y+f.h-33, 11, mode.accent, true, 0)
-		s.visible[i] = append(s.visible[i], label)
-		s.drawField(i, mode.accent, cx, cy, scale)
+		for j, color := range mode.colors {
+			x := cx + float64(j-1)*101*scale
+			y := cy - float64(j%2)*61*scale
+			r := 166 * scale
+			haze := s.board.Ellipse(x, y, 2*r, 2*r).FillRadialGradient(0, 0, r, 0,
+				builder.GradientStop{Position: 0, Color: alpha(color, 38)},
+				builder.GradientStop{Position: .50, Color: alpha(color, 14)},
+				builder.GradientStop{Position: 1, Color: alpha(color, 0)},
+			)
+			haze.Opacity(0)
+			s.track(i, haze)
+		}
+		s.drawField(i)
+		s.track(i, s.text(mode.legend, f.x+21, f.y+f.h-37, 11, mode.accent, true, 0))
 	}
-	mark := "FIELD / 01–03"
-	font := 11.0
-	if mobile {
-		mark = "01–03"
-		font = 9
+	for i := range 36 {
+		x := f.x + 23 + math.Mod(float64(i)*97.13, f.w-46)
+		y := f.y + 64 + math.Mod(float64(i)*59.41, f.h-126)
+		d := 1.25 + .72*float64(i%4)
+		s.board.Ellipse(x, y, d, d).Fill(alpha(0xFFB2C3FF, uint32(40+i%5*17)))
 	}
-	s.text(mark, f.x+f.w-108, f.y+20, font, muted, true, 0)
-}
-
-func (s *scene) drawField(mode int, color uint32, cx, cy, scale float64) {
-	series := [...]int{35, 39, 32}
-	for row := range series[mode] {
-		q := float64(row) / float64(series[mode]-1)
-		path := s.board.Path(cx, cy).Name(fmt.Sprintf("%s line %02d", studies[mode].name, row+1))
-		for p := 0; p <= 100; p++ {
-			t := float64(p) / 100
-			x, y := fieldPoint(mode, t, q)
-			path.LineTo(x*scale, y*scale)
-		}
-		alpha := uint32(104 + 138*math.Abs(math.Cos(q*math.Pi)))
-		path.Stroke(math.Max(.9, 1.55*scale), color&0xFFFFFF|alpha<<24)
-		if mode == 0 {
-			path.Close()
-		}
-		if mode != 0 {
-			path.Opacity(0)
-		}
-		s.visible[mode] = append(s.visible[mode], path)
-		s.paths[mode] = append(s.paths[mode], path)
+	s.text("LIGHT STUDIES", f.x+21, f.y+20, 12, muted, true, 0)
+	if !mobile {
+		s.rule(f.x+21, f.y+49, f.x+f.w-21, f.y+49, line)
+		s.rule(f.x+21, f.y+f.h-49, f.x+f.w-21, f.y+f.h-49, line)
 	}
 }
 
-func fieldPoint(mode int, t, q float64) (float64, float64) {
+type point struct{ x, y float64 }
+
+func fieldPoint(mode int, t, q float64) point {
+	u := 2 * math.Pi * t
+	d := q - .5
 	switch mode {
 	case 0:
-		u, v := 2*math.Pi*t, 2*math.Pi*q
-		radius := 147 + 54*math.Cos(v)
-		x, y, z := radius*math.Cos(u), radius*math.Sin(u), 54*math.Sin(v)
-		viewY, viewZ := .57*y-.82*z, .82*y+.57*z
-		p := 490 / (490 + viewZ)
-		return p * (.95*x + .31*viewY), p * (-.31*x + .95*viewY)
+		x := 226*math.Sin(u-.94) + 21*math.Sin(2*u)
+		y := 106*math.Sin(2*u-1.56) + 37*math.Cos(u-.48)
+		y += 94*d*math.Sin(u-.73) + 32*d
+		x += d * (56*math.Cos(u+1.3) + 25)
+		return point{.96*x + .28*y, -.28*x + .96*y}
 	case 1:
-		x, z := (t-.5)*408, (q-.5)*330
-		y := 61*math.Sin(x*.030+z*.024) + 24*math.Cos(z*.044-x*.011)
-		p := 590 / (590 + z*.55)
-		return p * (.84*x + .32*z), p * (.62*z + .85*y)
+		x := (t - .5) * 520
+		y := (87+68*q)*math.Sin(u*1.11+1.12+2*d) + 44*math.Sin(2*u-.6) + 99*d - .24*x
+		return point{x, y * .86}
 	default:
-		u := 2 * math.Pi * t
-		r := 36 + 145*q + (11+20*q)*math.Cos(5*u+q*math.Pi) + 13*math.Sin(2*u)
-		return r*math.Cos(u) + 25*math.Sin(q*math.Pi), .81*r*math.Sin(u) + 29*math.Sin(2*u+q*2)
+		a := u*1.54 - 1.43
+		r := 139 + 46*math.Cos(3.1*a-1.53) + 47*d + 18*math.Sin(2.4*a+q)
+		return point{1.28 * r * math.Cos(a), .84*r*math.Sin(a) - 28*math.Cos(1.52*a)}
+	}
+}
+
+func (s *scene) ribbon(mode int, row int, q, width float64, luminosity uint32, title string) {
+	const steps = 96
+	factor := s.scale
+	path := s.board.Path(s.centerX, s.centerY).Name(fmt.Sprintf("%s %s %02d", studies[mode].name, title, row))
+	side := func(sample int, sign float64) {
+		t := float64(sample) / steps
+		p := fieldPoint(mode, t, q)
+		a := fieldPoint(mode, t-.001, q)
+		b := fieldPoint(mode, t+.001, q)
+		dx, dy := b.x-a.x, b.y-a.y
+		length := math.Max(.001, math.Hypot(dx, dy))
+		taper := math.Pow(math.Max(0, math.Sin(math.Pi*t)), .53)
+		thickness := sign * width * taper * (0.74 + .26*math.Sin(2.4*math.Pi*t+.3+q))
+		path.LineTo((p.x-dy/length*thickness)*factor, (p.y+dx/length*thickness)*factor)
+	}
+	for k := range steps + 1 {
+		side(k, 1)
+	}
+	for k := steps; k >= 0; k-- {
+		side(k, -1)
+	}
+	c := studies[mode].colors
+	if title == "core" && row%3 != 0 {
+		c[1] = 0xFFF8F3FF
+	}
+	path.Close().FillGradient(-235*factor, 55*factor, 235*factor, -55*factor,
+		builder.GradientStop{Position: 0, Color: alpha(c[0], luminosity)},
+		builder.GradientStop{Position: .52, Color: alpha(c[1], luminosity)},
+		builder.GradientStop{Position: 1, Color: alpha(c[2], luminosity)},
+	)
+	path.Opacity(0)
+	s.track(mode, path)
+	s.paths[mode] = append(s.paths[mode], path)
+}
+
+func (s *scene) drawField(mode int) {
+	const strands = 10
+	layers := []struct {
+		name    string
+		width   float64
+		opacity uint32
+	}{
+		{"aura", 16, 5}, {"halo", 8, 16}, {"glow", 3.3, 52}, {"core", .93, 232},
+	}
+	for _, layer := range layers {
+		for row := range strands {
+			s.ribbon(mode, row, float64(row)/float64(strands-1), layer.width, layer.opacity, layer.name)
+		}
+	}
+
+	for _, size := range []float64{19, 4.9, 2.55} {
+		r := size * s.scale
+		dot := s.board.Ellipse(s.centerX, s.centerY, r*2, r*2).Name("Traveling light")
+		dot.FillRadialGradient(0, 0, r, 0,
+			builder.GradientStop{Position: 0, Color: alpha(0xFFFFFFFF, 247)},
+			builder.GradientStop{Position: .28, Color: alpha(studies[mode].accent, 150)},
+			builder.GradientStop{Position: 1, Color: alpha(studies[mode].accent, 0)},
+		)
+		dot.Opacity(0)
+		s.track(mode, dot)
+		s.sparks[mode] = append(s.sparks[mode], dot)
+	}
+}
+
+func (s *scene) animateField(anim *builder.AnimationBuilder, mode int) {
+	for _, path := range s.paths[mode] {
+		anim.KeyframeFloat(path, builder.PropRotation, 0, 0, builder.Linear()).
+			KeyframeFloat(path, builder.PropRotation, 120, .092, builder.Linear()).
+			KeyframeFloat(path, builder.PropRotation, 360, -.092, builder.Linear()).
+			KeyframeFloat(path, builder.PropRotation, 480, 0, builder.Linear())
+	}
+	const sweep = 48
+	for _, dot := range s.sparks[mode] {
+		for _, property := range []uint32{builder.PropScaleX, builder.PropScaleY} {
+			anim.KeyframeFloat(dot, property, 0, .01, builder.Linear()).
+				KeyframeFloat(dot, property, 32, 1, builder.Linear()).
+				KeyframeFloat(dot, property, 448, 1, builder.Linear()).
+				KeyframeFloat(dot, property, 480, .01, builder.Linear())
+		}
+		for step := range sweep + 1 {
+			t := float64(step) / sweep
+			p := fieldPoint(mode, t, .55)
+			angle := .092 * (1 - 4*math.Abs(t-.25))
+			if t > .75 {
+				angle = -.368 * (1 - t)
+			}
+			x := p.x*math.Cos(angle) - p.y*math.Sin(angle)
+			y := p.x*math.Sin(angle) + p.y*math.Cos(angle)
+			anim.KeyframeFloat(dot, builder.PropX, uint64(step*10), s.centerX+x*s.scale, builder.Linear())
+			anim.KeyframeFloat(dot, builder.PropY, uint64(step*10), s.centerY+y*s.scale, builder.Linear())
+		}
 	}
 }
 
@@ -205,10 +294,10 @@ func (s *scene) attachStateMachine() {
 		for j := range studies {
 			on := i == j
 			opacity := 0.0
-			button, text, number := uint32(0xFF1C201C), uint32(paper), uint32(muted)
+			button, text, number := uint32(0xFF171B2D), uint32(paper), uint32(muted)
 			if on {
 				opacity = 1
-				button, text, number = mode.accent, ink, 0xFF313817
+				button, text, number = mode.accent, ink, 0xFF282033
 			}
 			for _, target := range s.visible[j] {
 				anim.KeyframeFloat(target, builder.PropOpacity, 0, opacity, builder.Hold())
@@ -217,13 +306,7 @@ func (s *scene) attachStateMachine() {
 			anim.KeyframeColor(s.buttonLabels[j], builder.PropColorValue, 0, text, builder.Hold())
 			anim.KeyframeColor(s.buttonNumbers[j], builder.PropColorValue, 0, number, builder.Hold())
 		}
-		for idx, path := range s.paths[i] {
-			bias := float64(idx%5) * .006
-			anim.KeyframeFloat(path, builder.PropRotation, 0, 0, builder.Linear()).
-				KeyframeFloat(path, builder.PropRotation, 120, .085+bias, builder.Linear()).
-				KeyframeFloat(path, builder.PropRotation, 360, -.085-bias, builder.Linear()).
-				KeyframeFloat(path, builder.PropRotation, 480, 0, builder.Linear())
-		}
+		s.animateField(anim, i)
 		states[i] = layer.State(mode.name, builder.WithAnimation(mode.name))
 		// The Rive runtime wire enum reserves 5 for events and uses 6 for clicks.
 		const click = builder.ListenerType(6)

@@ -1,10 +1,10 @@
 # Field Studies
 
-3種類の動く図形を切り替える、Rive ベースのオリジナルサイト。[公開版](https://rive-field-studies.kkoheikosehira.chatgpt.site/)
+3種類の光の軌跡を切り替える、Rive ベースのオリジナルサイト。[公開版](https://rive-field-studies.kkoheikosehira.chatgpt.site/)
 
 ## 構成
 
-- `site/field-studies.riv` に PC とスマートフォン用のアートボード、文字、図形、モーション、ボタン、切り替えのステートマシンを収録。
+- `site/field-studies.riv` に PC とスマートフォン用のアートボード、文字、光のリボン、ハロー、モーション、ボタン、切り替えのステートマシンを収録。
 - `site/launch.js` は Rive の公式 Web ランタイムを起動し、画面サイズとキーボード入力を渡す。表示用の HTML は Canvas 1枚。
 - `scene/main.go` は `.riv` を再生成するソース。フォントとそのライセンス文は `scene/fonts/` にある。
 

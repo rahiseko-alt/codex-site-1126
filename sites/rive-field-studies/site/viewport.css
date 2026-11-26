@@ -1,6 +1,6 @@
 :root {
   color-scheme: dark;
-  background: #111311;
+  background: #080a13;
   color: #f1f0e8;
 }
 
@@ -16,7 +16,7 @@ canvas {
   touch-action: manipulation;
 }
 
-canvas:focus-visible { outline: 2px solid #e0f94d; outline-offset: -4px; }
+canvas:focus-visible { outline: 2px solid #bfa5ff; outline-offset: -4px; }
 
 #failure, noscript {
   position: fixed;
