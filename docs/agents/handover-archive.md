@@ -4,6 +4,20 @@ handover.md の保存上限（5 件）を超えて押し出された古いメモ
 会話開始時には読み込まれない。過去の経緯を掘り返すときだけ開く。新しいものを一番上に来るよう足す。
 
 ---
+## 2026-11-26 ポートフォリオ2件とカタログを追加
+
+**決めたこと**
+
+- Bohdan Ratiiev、Eliza Doltu、Ironside Computers の公開ページを別フォルダに収録した。サイトごとの README から起動手順と比較画像にアクセスできる。
+- 最新の5件の追加先は `sites/bratiiev/`、`sites/eliza-doltu/`、`sites/ironside-computers/`、`sites/maxima-therapy/`、`sites/telescope/`。
+
+**次にやること**
+
+- 公開版を更新する場合は、対象フォルダだけを固有の Sites プロジェクトに同期する。
+
+**未解決の問題**
+
+- Ironside のカートと注文、Bohdan Ratiiev の問い合わせは元サイトに移動する。Ironside の Tokyo Dream は初回に React の警告を出すことがある。
 ## 2026-11-26 MindMarket の再現版を追加
 
 **決めたこと**

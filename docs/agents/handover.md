@@ -8,6 +8,21 @@
 
 ---
 
+## 2026-11-26 オリジナル Rive サイト Field Studies を追加
+
+**決めたこと**
+
+- PC とモバイルのアートボード、文字、図形、ボタン、3つのモーションを Rive ファイルに収録した。
+- 起動、Scene の再生成、公開手順は `sites/rive-field-studies/README.md` にまとめた。
+
+**次にやること**
+
+- 図形や操作を変更する場合は `scene/main.go` を編集し、`.riv` を再生成する。
+
+**未解決の問題**
+
+- Rive の Canvas を起動するための HTML と短い JavaScript がある。
+
 ## 2026-11-26 Rive の公開マーケティングサイトを公開
 
 **決めたこと**
@@ -67,18 +82,3 @@
 **未解決の問題**
 
 - A Twosome Place は元サイトが HTTP 403 を返す。PC とスマートフォンの取得結果を `sites/twosome/` に記録した。
-
-## 2026-11-26 ポートフォリオ2件とカタログを追加
-
-**決めたこと**
-
-- Bohdan Ratiiev、Eliza Doltu、Ironside Computers の公開ページを別フォルダに収録した。サイトごとの README から起動手順と比較画像にアクセスできる。
-- 最新の5件の追加先は `sites/bratiiev/`、`sites/eliza-doltu/`、`sites/ironside-computers/`、`sites/maxima-therapy/`、`sites/telescope/`。
-
-**次にやること**
-
-- 公開版を更新する場合は、対象フォルダだけを固有の Sites プロジェクトに同期する。
-
-**未解決の問題**
-
-- Ironside のカートと注文、Bohdan Ratiiev の問い合わせは元サイトに移動する。Ironside の Tokyo Dream は初回に React の警告を出すことがある。
