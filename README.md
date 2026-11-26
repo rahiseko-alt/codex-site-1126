@@ -21,5 +21,6 @@
 | Chillhouse Soho | [sites/chillhouse-soho](sites/chillhouse-soho/README.md) |
 | Tenoverten | [sites/tenoverten](sites/tenoverten/README.md) |
 | A Twosome Place の取得状況 | [sites/twosome](sites/twosome/README.md) |
+| Herzel Dental Practice 英語版 | [sites/herzel-zahnarzt](sites/herzel-zahnarzt/README.md) |
 
 [サイト追加のルール](docs/site-layout.md) · [開発テンプレートの資料](docs/development-template.md)

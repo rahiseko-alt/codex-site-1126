@@ -1,0 +1,99 @@
+.services__background {
+    pointer-events: none;
+}
+
+.wpcf7-not-valid {
+    border: 1px solid #f00;
+}
+
+.wpcf7-not-valid-tip {
+    color: #f00;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.wpcf7 form .wpcf7-response-output {
+    margin-top: 20px;
+    margin: 20px 0 0 0 !important; 
+    padding: 0 !important;
+    border: none !important;
+}
+
+.wpcf7 form.invalid .wpcf7-response-output,
+.wpcf7 form.unaccepted .wpcf7-response-output,
+.wpcf7 form.payment-required .wpcf7-response-output {
+    color: #f00;
+}
+
+.wpcf7 form.sent .wpcf7-response-output {
+    color: #00cc5e;
+}
+
+.page-content {
+    padding-top: 115px;
+    margin-bottom: 68px;
+}
+
+@media (min-width: 992px) {
+    .page-content {
+        padding-top: 122px;
+        margin-bottom: 50px;
+    }   
+}
+
+//////// DE version start //////////
+
+html[lang="de-DE"] .feedback.feedback-129 .feedback__title {
+  font-size: 26px;
+  line-height: 37.2px;
+}
+html[lang="de-DE"] .values__item {
+  font-size: 32px;
+  padding-right: 30px;
+}
+html[lang="de-DE"] .values__item span {
+  margin-right: 5px;
+}
+html[lang="de-DE"] .services__item {
+  word-wrap: word-break;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+}
+@media (min-width: 768px) {
+  html[lang="de-DE"] .feedback.feedback0-129 .feedback__title {
+    line-height: 52.2px;
+  }
+  html[lang="de-DE"] .advantages__title {
+    max-width: 903px;
+  }
+}
+@media (min-width: 992px) {
+  html[lang="de-DE"] .values__item {
+    font-size: 50px;
+    line-height: 60px;
+    padding-right: 70px;
+  }
+  html[lang="de-DE"] .values__item span {
+    margin-right: 0;
+  }
+  html[lang="de-DE"] .values__item .sb {
+    margin-right: 58px;
+  }
+  html[lang="de-DE"] .values .values__item:nth-child(3) .sep {
+    text-align: right;
+    margin-right: -55px;
+  }
+  html[lang="de-DE"] .feedback.feedback-129 .feedback__title {
+    font-size: 31px;
+    line-height: 40px;
+  }
+}
+@media (min-width: 1200px) {
+  html[lang="de-DE"] .feedback.feedback-129 .feedback__title {
+    font-size: 42px;
+    line-height: 52px;
+  }
+}
+
+/////// DE version end //////////

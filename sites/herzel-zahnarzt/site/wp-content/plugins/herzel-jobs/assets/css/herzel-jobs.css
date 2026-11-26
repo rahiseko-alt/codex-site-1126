@@ -1,0 +1,629 @@
+/*
+ * Оформление вакансий.
+ *
+ * Ни одного жёстко зашитого цвета в правилах: всё через --hzjobs-*
+ * с фирменным значением в фолбэке. Отсюда три режима без правки CSS:
+ *   builtin — переменные печатает PHP на .hzjobs (цвета из настроек);
+ *   theme   — PHP молчит, переменные задаёт тема на :root, они наследуются;
+ *   ничего  — работают фолбэки, то есть фирменный стиль Herzel.
+ */
+
+.hzjobs {
+	color: var(--hzjobs-text, #2d2d2d);
+	font-family: var(--hzjobs-font, inherit);
+}
+
+/* --- Архив --- */
+
+/*
+ * Тёмный герой под заголовком — копия .intro-in внутренних страниц темы
+ * dental: фото на весь блок, затемнение rgba(45,45,45,.8), белый заголовок.
+ * Шапка сайта (z-index 15, белый текст) ложится поверх. Фото подставляет
+ * PHP из активной темы; без него остаётся ровный тёмный фон того же цвета,
+ * что и оверлей, — вид сохраняется на любой теме.
+ */
+.hzjobs-hero {
+	box-sizing: border-box;
+	position: relative;
+	display: flex;
+	align-items: flex-end;
+	min-height: 420px;
+	padding: 150px 0 70px;
+	background-color: #2d2d2d;
+	background-size: cover;
+	background-position: center;
+}
+
+.hzjobs-hero::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: rgba(45, 45, 45, 0.8);
+}
+
+.hzjobs-hero__container {
+	box-sizing: border-box;
+	position: relative;
+	width: 100%;
+	max-width: 1240px;
+	margin: 0 auto;
+	padding: 0 40px;
+}
+
+.hzjobs-hero__title {
+	margin: 0;
+	color: #fff;
+	font-size: 88px;
+	font-weight: 400;
+	line-height: 1.05;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+/* Контент под героем: контейнер как у страниц сайта, воздух сверху и до
+   футера; min-height не даёт футеру подпереть героя при одной вакансии. */
+.hzjobs-archive__inner {
+	box-sizing: border-box;
+	max-width: 1240px;
+	min-height: 40vh;
+	margin: 0 auto;
+	padding: 70px 40px 120px;
+}
+
+.hzjobs-archive__pagination {
+	margin-top: 40px;
+}
+
+.hzjobs-archive__pagination a {
+	color: var(--hzjobs-accent-deep, #106285);
+}
+
+/* --- Список карточек --- */
+
+/*
+ * Плотность сетки зависит от числа вакансий (гипотеза: их 1–3).
+ * PHP вешает класс: --half при одной-двух (карточка в полширины,
+ * одинокая вакансия не расползается на всю страницу), --third от трёх.
+ * Планшет — две колонки, мобильный — одна.
+ */
+.hzjobs-list {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 30px;
+}
+
+.hzjobs-list--half {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Одна вакансия: та же полуширина (как колонка сетки --half,
+   с поправкой на половину отступа), но по центру страницы. */
+.hzjobs-list--single {
+	grid-template-columns: minmax(0, 1fr);
+	max-width: calc(50% - 15px);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media (max-width: 1023px) {
+	.hzjobs-list--third {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 640px) {
+	.hzjobs-list,
+	.hzjobs-list--half,
+	.hzjobs-list--third {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	/* На мобильном одинокая карточка занимает всю ширину, как остальные. */
+	.hzjobs-list--single {
+		max-width: none;
+	}
+}
+
+.hzjobs-card {
+	display: flex;
+	flex-direction: column;
+	padding: 30px;
+	background: var(--hzjobs-surface, #fff);
+	border: 1px solid var(--hzjobs-line, #e9e9e9);
+	border-radius: var(--hzjobs-radius, 0);
+	border-top: 3px solid var(--hzjobs-accent, #49b1d0);
+	transition: 0.3s box-shadow, 0.3s border-color;
+}
+
+.hzjobs-card:hover {
+	border-color: var(--hzjobs-accent, #49b1d0);
+	box-shadow: 0 10px 30px rgba(16, 98, 133, 0.12);
+}
+
+.hzjobs-card__title {
+	margin: 0 0 16px;
+	font-size: 22px;
+	line-height: 1.25;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+.hzjobs-card__title a {
+	color: var(--hzjobs-accent-deep, #106285);
+	text-decoration: none;
+}
+
+.hzjobs-card__title a:hover {
+	color: var(--hzjobs-accent, #49b1d0);
+}
+
+.hzjobs-card__excerpt {
+	margin: 0 0 24px;
+	color: var(--hzjobs-muted, #7d7d80);
+	line-height: 1.6;
+}
+
+/* Кнопка всегда прижата к низу — карточки в ряду выравниваются. */
+.hzjobs-card__actions {
+	margin-top: auto;
+}
+
+/* Пустой список: спокойный центрированный блок в стиле сайта —
+   заголовок с фирменной чертой и два абзаца. */
+.hzjobs-empty {
+	max-width: 640px;
+	margin: 0 auto;
+	padding: 56px 32px;
+	background: var(--hzjobs-ice, #f3fbff);
+	border-radius: var(--hzjobs-radius, 0);
+	text-align: center;
+}
+
+.hzjobs-empty__title {
+	margin: 0 0 18px;
+	color: var(--hzjobs-accent-deep, #106285);
+	font-size: 26px;
+	font-weight: 500;
+	line-height: 1.25;
+	text-transform: uppercase;
+}
+
+/* Та же акцентная черта, что у заголовков разделов, — по центру. */
+.hzjobs-empty__title::after {
+	content: '';
+	display: block;
+	width: 40px;
+	height: 2px;
+	margin: 14px auto 0;
+	background: var(--hzjobs-accent, #49b1d0);
+}
+
+.hzjobs-empty__text {
+	margin: 0 0 10px;
+	color: var(--hzjobs-text, #2d2d2d);
+	line-height: 1.6;
+}
+
+.hzjobs-empty__note {
+	margin: 0;
+	color: var(--hzjobs-muted, #7d7d80);
+	line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+	.hzjobs-empty { padding: 40px 20px; }
+	.hzjobs-empty__title { font-size: 22px; }
+}
+
+/* --- Бейджи --- */
+
+.hzjobs-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 0 0 20px;
+	padding: 0;
+	list-style: none;
+}
+
+.hzjobs-chip {
+	transition: 0.3s background, 0.3s color;
+	padding: 5px 12px;
+	background: var(--hzjobs-ice, #f3fbff);
+	color: var(--hzjobs-accent-deep, #106285);
+	border-radius: var(--hzjobs-radius, 0);
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.4;
+}
+
+/* Профессия — ссылка на свой архив, но выглядит тем же бейджем. */
+.hzjobs-chip--term a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.hzjobs-chip--term:hover {
+	background: var(--hzjobs-accent, #49b1d0);
+}
+
+.hzjobs-chip--term:hover a {
+	color: #fff;
+}
+
+/* --- Кнопка --- */
+
+/* Каркас кнопки повторяет .site-button темы dental. Если в настройках
+   задан класс темы, её правила перекроют фон и типографику. */
+.hzjobs-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	min-height: 49px;
+	padding: 5px 20px;
+	border: 1px solid var(--hzjobs-accent, #49b1d0);
+	border-radius: var(--hzjobs-radius, 0);
+	background: var(--hzjobs-accent, #49b1d0);
+	color: #fff;
+	font-weight: 500;
+	text-transform: uppercase;
+	text-decoration: none;
+	cursor: pointer;
+	transition: 0.3s color, 0.3s border-color, 0.3s background;
+}
+
+.hzjobs-button:hover {
+	background: none;
+	color: var(--hzjobs-accent, #49b1d0);
+}
+
+.hzjobs-button__arrow {
+	flex: none;
+	transition: 0.3s transform;
+}
+
+.hzjobs-button:hover .hzjobs-button__arrow {
+	transform: rotate(-45deg);
+}
+
+/* Второстепенная кнопка на белом фоне карточки. */
+.hzjobs-button--ghost {
+	background: none;
+	color: var(--hzjobs-accent-deep, #106285);
+	border-color: var(--hzjobs-accent-deep, #106285);
+}
+
+.hzjobs-button--ghost:hover {
+	background: var(--hzjobs-accent-deep, #106285);
+	color: #fff;
+}
+
+/* Кнопка на тёмном фирменном блоке. */
+.hzjobs-button--on-deep {
+	background: var(--hzjobs-ice, #f3fbff);
+	border-color: var(--hzjobs-ice, #f3fbff);
+	color: var(--hzjobs-accent-deep, #106285);
+}
+
+.hzjobs-button--on-deep:hover {
+	background: none;
+	color: var(--hzjobs-ice, #f3fbff);
+}
+
+/* --- Страница вакансии --- */
+
+.hzjobs-single-page__inner {
+	box-sizing: border-box;
+	max-width: 1240px;
+	min-height: 30vh;
+	margin: 0 auto;
+	padding: 70px 40px 120px;
+}
+
+/* Текст вакансии не растягиваем на весь контейнер — длина строки. */
+.hzjobs-single-page__inner .hzjobs {
+	max-width: 860px;
+}
+
+.hzjobs-single-page__back {
+	margin-top: 30px;
+}
+
+.hzjobs-single-page__back a {
+	color: var(--hzjobs-accent-deep, #106285);
+	text-decoration: none;
+}
+
+.hzjobs-single-page__back a:hover {
+	color: var(--hzjobs-accent, #49b1d0);
+}
+
+.hzjobs-single__salary {
+	margin: 0 0 24px;
+	color: var(--hzjobs-muted, #7d7d80);
+}
+
+.hzjobs-apply {
+	margin-top: 40px;
+	padding: 40px;
+	background: var(--hzjobs-accent-deep, #106285);
+	border-radius: var(--hzjobs-radius, 0);
+	color: var(--hzjobs-ice, #f3fbff);
+	text-align: center;
+}
+
+.hzjobs-apply__title {
+	margin: 0 0 12px;
+	color: var(--hzjobs-ice, #f3fbff);
+	font-weight: 400;
+	text-transform: uppercase;
+}
+
+.hzjobs-apply__text {
+	margin: 0 0 24px;
+	color: var(--hzjobs-ice, #f3fbff);
+}
+
+/* Заголовок 88px живёт только на широком десктопе — как на сайте. */
+@media (max-width: 1200px) {
+	.hzjobs-hero__title {
+		font-size: 56px;
+	}
+
+	.hzjobs-hero {
+		min-height: 340px;
+		padding: 120px 0 50px;
+	}
+
+	.hzjobs-hero__container {
+		padding: 0 30px;
+	}
+
+	.hzjobs-archive__inner,
+	.hzjobs-single-page__inner {
+		padding: 50px 30px 90px;
+	}
+}
+
+@media (max-width: 600px) {
+	.hzjobs-card,
+	.hzjobs-apply {
+		padding: 24px 20px;
+	}
+
+	.hzjobs-list {
+		gap: 20px;
+	}
+
+	/* «STELLENANGEBOTE» в 38px не влезает в узкий экран. */
+	.hzjobs-hero__title {
+		font-size: 30px;
+	}
+
+	.hzjobs-hero {
+		min-height: 240px;
+		padding: 100px 0 36px;
+	}
+
+	.hzjobs-hero__container {
+		padding: 0 20px;
+	}
+
+	.hzjobs-archive__inner,
+	.hzjobs-single-page__inner {
+		padding: 40px 20px 70px;
+	}
+}
+
+/* --- Типографика текста вакансии --- */
+
+/*
+ * Общая часть для текста вакансии и описания рубрики.
+ * Маркер списка — та же стрелка, что и в кнопках: одна форма на весь
+ * плагин. Красится через маску, поэтому следует за --hzjobs-accent.
+ */
+
+.hzjobs-content,
+.hzjobs-archive__intro {
+	font-size: 17px;
+	line-height: 1.75;
+}
+
+.hzjobs-content p,
+.hzjobs-archive__intro p {
+	margin: 0 0 22px;
+}
+
+.hzjobs-content > *:last-child,
+.hzjobs-archive__intro > *:last-child {
+	margin-bottom: 0;
+}
+
+.hzjobs-content h2,
+.hzjobs-content h3,
+.hzjobs-content h4 {
+	margin: 44px 0 18px;
+	color: var(--hzjobs-accent-deep, #106285);
+	font-weight: 500;
+	line-height: 1.25;
+	text-transform: uppercase;
+}
+
+.hzjobs-content h2 { font-size: 26px; }
+.hzjobs-content h3 { font-size: 21px; }
+.hzjobs-content h4 { font-size: 18px; }
+
+/* Короткая акцентная черта под заголовком раздела. */
+.hzjobs-content h2::after,
+.hzjobs-content h3::after {
+	content: '';
+	display: block;
+	width: 40px;
+	height: 2px;
+	margin-top: 12px;
+	background: var(--hzjobs-accent, #49b1d0);
+}
+
+.hzjobs-content > *:first-child {
+	margin-top: 0;
+}
+
+.hzjobs-content strong,
+.hzjobs-archive__intro strong {
+	color: var(--hzjobs-accent-deep, #106285);
+	font-weight: 500;
+}
+
+.hzjobs-content a,
+.hzjobs-archive__intro a {
+	color: var(--hzjobs-accent-deep, #106285);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	text-decoration-thickness: 1px;
+	transition: 0.3s color;
+}
+
+.hzjobs-content a:hover,
+.hzjobs-archive__intro a:hover {
+	color: var(--hzjobs-accent, #49b1d0);
+}
+
+/* --- Списки --- */
+
+.hzjobs-content ul,
+.hzjobs-content ol,
+.hzjobs-archive__intro ul,
+.hzjobs-archive__intro ol {
+	margin: 0 0 24px;
+	padding-left: 0;
+	list-style: none;
+}
+
+.hzjobs-content li,
+.hzjobs-archive__intro li {
+	position: relative;
+	margin-bottom: 12px;
+	padding-left: 30px;
+}
+
+.hzjobs-content li:last-child,
+.hzjobs-archive__intro li:last-child {
+	margin-bottom: 0;
+}
+
+/* Стрелка из кнопки в роли маркера. Маска, а не фон, — иначе цвет
+   не пошёл бы за фирменной переменной. */
+.hzjobs-content ul > li::before,
+.hzjobs-archive__intro ul > li::before {
+	content: '';
+	position: absolute;
+	top: 0.62em;
+	left: 0;
+	width: 14px;
+	height: 10px;
+	background-color: var(--hzjobs-accent, #49b1d0);
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 14 10'%3E%3Cpath d='M9 1l4 4-4 4M13 5H1' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 14 10'%3E%3Cpath d='M9 1l4 4-4 4M13 5H1' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+	transition: 0.3s transform;
+}
+
+/* Стрелка чуть подаётся вперёд, когда читатель ведёт по пункту. */
+.hzjobs-content ul > li:hover::before,
+.hzjobs-archive__intro ul > li:hover::before {
+	transform: translateX(3px);
+}
+
+/* Нумерованный список: цифра в фирменном цвете вместо стрелки. */
+.hzjobs-content ol,
+.hzjobs-archive__intro ol {
+	counter-reset: hzjobs-counter;
+}
+
+.hzjobs-content ol > li,
+.hzjobs-archive__intro ol > li {
+	counter-increment: hzjobs-counter;
+}
+
+.hzjobs-content ol > li::before,
+.hzjobs-archive__intro ol > li::before {
+	content: counter(hzjobs-counter) '.';
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: var(--hzjobs-accent, #49b1d0);
+	font-weight: 500;
+}
+
+/* Вложенный список — на ступень мельче и с отступом. */
+.hzjobs-content li > ul,
+.hzjobs-content li > ol {
+	margin: 12px 0 0;
+}
+
+/* --- Прочее в тексте --- */
+
+.hzjobs-content blockquote {
+	margin: 0 0 24px;
+	padding: 4px 0 4px 24px;
+	border-left: 3px solid var(--hzjobs-accent, #49b1d0);
+	color: var(--hzjobs-muted, #7d7d80);
+	font-style: italic;
+}
+
+.hzjobs-content blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+.hzjobs-content hr {
+	margin: 40px 0;
+	border: 0;
+	border-top: 1px solid var(--hzjobs-line, #e9e9e9);
+}
+
+.hzjobs-content img {
+	max-width: 100%;
+	height: auto;
+}
+
+@media (max-width: 600px) {
+	.hzjobs-content,
+	.hzjobs-archive__intro {
+		font-size: 16px;
+	}
+
+	.hzjobs-content h2 { font-size: 22px; }
+	.hzjobs-content h3 { font-size: 19px; }
+}
+
+/* --- Переключатель языков (выводится только при активном Polylang) --- */
+
+.hzjobs-langs {
+	display: flex;
+	justify-content: flex-end;
+	gap: 6px;
+	margin: 0 0 16px;
+}
+
+.hzjobs-langs__item {
+	padding: 4px 10px;
+	color: var(--hzjobs-muted, #7d7d80);
+	font-size: 13px;
+	font-weight: 500;
+	letter-spacing: 0.06em;
+	text-decoration: none;
+	border: 1px solid var(--hzjobs-line, #e9e9e9);
+	border-radius: var(--hzjobs-radius, 0);
+	transition: 0.3s color, 0.3s border-color, 0.3s background;
+}
+
+a.hzjobs-langs__item:hover {
+	color: #fff;
+	background: var(--hzjobs-accent, #49b1d0);
+	border-color: var(--hzjobs-accent, #49b1d0);
+}
+
+.hzjobs-langs__item--current {
+	color: var(--hzjobs-accent-deep, #106285);
+	border-color: var(--hzjobs-accent-deep, #106285);
+}
