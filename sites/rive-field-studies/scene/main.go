@@ -45,6 +45,7 @@ type scene struct {
 	buttons                 [3]*builder.ShapeRef
 	buttonLabels            [3]*builder.TextRef
 	buttonNumbers           [3]*builder.TextRef
+	downloadButtons         [2]*builder.ShapeRef
 	sparks                  [3][]*builder.ShapeRef
 	centerX, centerY, scale float64
 }
@@ -79,31 +80,30 @@ func (s *scene) chrome(w, h float64, mobile bool) frame {
 	s.board.Ellipse(gutter+10, 46, 17, 17).Stroke(1.35, paper)
 	s.board.Ellipse(gutter+10, 46, 8, 17).Stroke(1.1, paper)
 	s.rule(gutter+1, 46, gutter+19, 46, paper)
-	s.text("FIELD STUDIES", gutter+31, 34, 19, paper, false, 650)
-	s.text("MOTION LAB", w-gutter-100, 41, 12, muted, true, 0)
+	s.text("AFTERGLOW", gutter+31, 34, 19, paper, false, 650)
+	s.text("WALLPAPERS", w-gutter-100, 41, 12, muted, true, 0)
 	s.rule(gutter, 77, w-gutter, 77, line)
 
 	if mobile {
-		s.text("INTERACTIVE LIGHT STUDIES", 24, 103, 10.5, studies[0].accent, true, 0)
-		s.text("LIGHT", 20, 124, 76, paper, false, 700)
-		s.text("STUDIES", 20, 192, 76, paper, false, 700)
-		s.text("Light in motion.", 24, 283, 16, muted, false, 0)
+		s.text("LIGHT WALLPAPERS", 24, 103, 10.5, studies[0].accent, true, 0)
+		s.text("AFTER", 20, 124, 76, paper, false, 700)
+		s.text("GLOW", 20, 192, 76, paper, false, 700)
+		s.text("Light wallpapers for any screen.", 24, 283, 16, muted, false, 0)
 		s.addButtons(24, 324, w-48, 54, true)
-		s.rule(24, 810, w-24, 810, line)
-		s.text("FIELD STUDIES", 24, 827, 11, paper, true, 0)
-		s.text("SELECT A STUDY ABOVE", 238, 827, 10, muted, true, 0)
-		return frame{24, 396, w - 48, 389}
+		s.addDownloads(24, 806, w-48)
+		return frame{24, 396, w - 48, 386}
 	}
 
-	s.text("INTERACTIVE LIGHT STUDIES", 64, 200, 14, studies[0].accent, true, 0)
-	s.text("LIGHT", 55, 231, 134, paper, false, 700)
-	s.text("STUDIES", 55, 344, 134, paper, false, 700)
-	s.text("Light in motion.", 64, 522, 25, paper, false, 0)
-	s.text("Choose a study to change the light.", 64, 560, 17, muted, false, 0)
+	s.text("LIGHT WALLPAPERS", 64, 200, 14, studies[0].accent, true, 0)
+	s.text("AFTER", 55, 231, 134, paper, false, 700)
+	s.text("GLOW", 55, 344, 134, paper, false, 700)
+	s.text("Light wallpapers for any screen.", 64, 522, 25, paper, false, 0)
+	s.text("Choose a pattern, then save it as a PNG.", 64, 560, 17, muted, false, 0)
 	s.addButtons(64, 619, 504, 62, false)
+	s.addDownloads(64, 716, 504)
 	s.rule(64, h-62, w-64, h-62, line)
-	s.text("FIELD STUDIES", 64, h-45, 12, paper, true, 0)
-	s.text("PRESS 1–3 TO SWITCH", w-220, h-45, 12, muted, true, 0)
+	s.text("AFTERGLOW", 64, h-45, 12, paper, true, 0)
+	s.text("1–3: PATTERN", w-220, h-45, 12, muted, true, 0)
 	return frame{636, 124, w - 700, h - 231}
 }
 
@@ -123,6 +123,24 @@ func (s *scene) addButtons(x, y, w, h float64, mobile bool) {
 	}
 }
 
+func (s *scene) addDownloads(x, y, width float64) {
+	const gap = 8.
+	buttonWidth := (width - gap) / 2
+	titles := []string{"Save desktop", "Save phone"}
+	dimensions := []string{"1920 × 1080 · PNG", "1080 × 1920 · PNG"}
+	for i, title := range titles {
+		left := x + float64(i)*(buttonWidth+gap)
+		s.downloadButtons[i] = rect(s.board, left, y, buttonWidth, 63, 0xFF1D1933).
+			CornerRadius(8).Stroke(1, 0xFF51446B).Name(title)
+		s.text(title, left+13, y+8, 17, paper, false, 650)
+		s.text(dimensions[i], left+13, y+36, 10, muted, true, 0)
+		arrowX, arrowY := left+buttonWidth-23, y+24
+		s.rule(arrowX, arrowY-6, arrowX, arrowY+6, 0xFFD6C6FF)
+		s.board.Path(0, 0).LineTo(arrowX-4, arrowY+2).
+			LineTo(arrowX, arrowY+6).LineTo(arrowX+4, arrowY+2).Stroke(1, 0xFFD6C6FF)
+	}
+}
+
 func alpha(color uint32, opacity uint32) uint32 {
 	return color&0xFFFFFF | opacity<<24
 }
@@ -133,6 +151,18 @@ func (s *scene) track(mode int, item builder.AnimTarget) {
 
 func (s *scene) drawPanel(f frame, mobile bool) {
 	rect(s.board, f.x, f.y, f.w, f.h, 0xFF0B0E1C).CornerRadius(10).Stroke(1, line)
+	s.drawArt(f)
+	for i, mode := range studies {
+		s.track(i, s.text(mode.legend, f.x+21, f.y+f.h-37, 11, mode.accent, true, 0))
+	}
+	s.text("PREVIEW", f.x+21, f.y+20, 12, muted, true, 0)
+	if !mobile {
+		s.rule(f.x+21, f.y+49, f.x+f.w-21, f.y+49, line)
+		s.rule(f.x+21, f.y+f.h-49, f.x+f.w-21, f.y+f.h-49, line)
+	}
+}
+
+func (s *scene) drawArt(f frame) {
 	s.centerX, s.centerY = f.x+f.w/2, f.y+f.h*.52
 	s.scale = .94 * math.Min(f.w/546, f.h/465)
 	cx, cy, scale := s.centerX, s.centerY, s.scale
@@ -151,18 +181,12 @@ func (s *scene) drawPanel(f frame, mobile bool) {
 			s.track(i, haze)
 		}
 		s.drawField(i)
-		s.track(i, s.text(mode.legend, f.x+21, f.y+f.h-37, 11, mode.accent, true, 0))
 	}
 	for i := range 36 {
 		x := f.x + 23 + math.Mod(float64(i)*97.13, f.w-46)
 		y := f.y + 64 + math.Mod(float64(i)*59.41, f.h-126)
 		d := 1.25 + .72*float64(i%4)
 		s.board.Ellipse(x, y, d, d).Fill(alpha(0xFFB2C3FF, uint32(40+i%5*17)))
-	}
-	s.text("LIGHT STUDIES", f.x+21, f.y+20, 12, muted, true, 0)
-	if !mobile {
-		s.rule(f.x+21, f.y+49, f.x+f.w-21, f.y+49, line)
-		s.rule(f.x+21, f.y+f.h-49, f.x+f.w-21, f.y+f.h-49, line)
 	}
 }
 
@@ -283,9 +307,17 @@ func (s *scene) animateField(anim *builder.AnimationBuilder, mode int) {
 	}
 }
 
-func (s *scene) attachStateMachine() {
+func (s *scene) attachStateMachine(interactive bool) {
 	controller := s.board.StateMachine("Field Selector")
 	selection := controller.NumberInput("Study")
+	// The runtime wire format uses 6 for the click listener.
+	const click = builder.ListenerType(6)
+	if interactive {
+		download := controller.NumberInput("Download")
+		for i, button := range s.downloadButtons {
+			controller.Listener(button, click).SetNumber(download, float64(i+1))
+		}
+	}
 	layer := controller.Layer("Studies")
 	states := make([]*builder.StateRef, len(studies))
 
@@ -302,15 +334,17 @@ func (s *scene) attachStateMachine() {
 			for _, target := range s.visible[j] {
 				anim.KeyframeFloat(target, builder.PropOpacity, 0, opacity, builder.Hold())
 			}
-			anim.KeyframeColor(s.buttons[j], builder.PropColorValue, 0, button, builder.Hold())
-			anim.KeyframeColor(s.buttonLabels[j], builder.PropColorValue, 0, text, builder.Hold())
-			anim.KeyframeColor(s.buttonNumbers[j], builder.PropColorValue, 0, number, builder.Hold())
+			if interactive {
+				anim.KeyframeColor(s.buttons[j], builder.PropColorValue, 0, button, builder.Hold())
+				anim.KeyframeColor(s.buttonLabels[j], builder.PropColorValue, 0, text, builder.Hold())
+				anim.KeyframeColor(s.buttonNumbers[j], builder.PropColorValue, 0, number, builder.Hold())
+			}
 		}
 		s.animateField(anim, i)
 		states[i] = layer.State(mode.name, builder.WithAnimation(mode.name))
-		// The Rive runtime wire enum reserves 5 for events and uses 6 for clicks.
-		const click = builder.ListenerType(6)
-		controller.Listener(s.buttons[i], click).SetNumber(selection, float64(i))
+		if interactive {
+			controller.Listener(s.buttons[i], click).SetNumber(selection, float64(i))
+		}
 	}
 	for i, from := range states {
 		for j, to := range states {
@@ -326,7 +360,15 @@ func addBoard(file *builder.Builder, name string, width, height float64, mobile 
 	s := scene{board: board, sans: board.EmbedFont("Space Grotesk", grotesk), mono: board.EmbedFont("IBM Plex Mono", mono)}
 	panel := s.chrome(width, height, mobile)
 	s.drawPanel(panel, mobile)
-	s.attachStateMachine()
+	s.attachStateMachine(true)
+}
+
+func addWallpaper(file *builder.Builder, name string, width, height float64) {
+	board := file.Artboard(name, width, height)
+	rect(board, 0, 0, width, height, 0xFF080A17)
+	s := scene{board: board}
+	s.drawArt(frame{0, 0, width, height})
+	s.attachStateMachine(false)
 }
 
 func main() {
@@ -336,7 +378,9 @@ func main() {
 	}
 	file := builder.New()
 	addBoard(file, "Desktop", 1440, 900, false)
-	addBoard(file, "Mobile", 430, 856, true)
+	addBoard(file, "Mobile", 430, 894, true)
+	addWallpaper(file, "Desktop Wallpaper", 1920, 1080)
+	addWallpaper(file, "Phone Wallpaper", 1080, 1920)
 	data, err := file.Bytes()
 	if err == nil {
 		err = os.WriteFile(os.Args[1], data, 0644)

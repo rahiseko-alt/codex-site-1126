@@ -23,3 +23,13 @@ canvas:focus-visible { outline: 2px solid #bfa5ff; outline-offset: -4px; }
   inset: auto 1rem 1rem;
   font: 1rem system-ui, sans-serif;
 }
+
+.export-surface {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}

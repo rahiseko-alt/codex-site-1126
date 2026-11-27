@@ -1,11 +1,11 @@
-# Field Studies
+# Afterglow
 
-3種類の光の軌跡を切り替える、Rive ベースのオリジナルサイト。[公開版](https://rive-field-studies.kkoheikosehira.chatgpt.site/)
+光の軌跡を選び、PC用とスマートフォン用の壁紙をPNGで保存するサイト。[公開版](https://rive-field-studies.kkoheikosehira.chatgpt.site/)
 
 ## 構成
 
 - `site/field-studies.riv` に PC とスマートフォン用のアートボード、文字、光のリボン、ハロー、モーション、ボタン、切り替えのステートマシンを収録。
-- `site/launch.js` は Rive の公式 Web ランタイムを起動し、画面サイズとキーボード入力を渡す。表示用の HTML は Canvas 1枚。
+- `site/launch.js` は Rive の公式 Web ランタイムを起動し、画面サイズとキーボード入力を渡し、壁紙用アートボードの描画をPNGとして保存する。表示用の HTML は Canvas 1枚。
 - `scene/main.go` は `.riv` を再生成するソース。フォントとそのライセンス文は `scene/fonts/` にある。
 
 ## 起動
@@ -18,7 +18,7 @@ npm run build
 python3 -m http.server 4195 --directory dist
 ```
 
-`http://127.0.0.1:4195/` を開く。Orbit、Wave、Mesh をクリックまたはタップで切り替えられる。Canvas にフォーカスすると `1`、`2`、`3` キーでも操作できる。
+`http://127.0.0.1:4195/` を開く。Orbit、Wave、Mesh をクリックまたはタップで切り替えられる。「Save desktop」は1920×1080、「Save phone」は1080×1920のPNGを保存する。Canvas にフォーカスすると `1`〜`3` で柄を選び、`D` と `M` で保存できる。壁紙はブラウザの中で描画する。
 
 ## Rive ファイルの再生成
 
@@ -35,6 +35,7 @@ go run . ../site/field-studies.riv
 
 ## 画面確認
 
-- [PC・Orbit](docs/qa/desktop-orbit.webp)
-- [PC・Wave](docs/qa/desktop-wave.webp)
-- [スマートフォン・Mesh](docs/qa/mobile-mesh.webp)
+- [PC の画面](docs/qa/desktop-orbit.webp)
+- [スマートフォンの画面](docs/qa/mobile-home.webp)
+- [PC 用の出力例・Wave](docs/qa/desktop-wave.webp)
+- [スマートフォン用の出力例・Mesh](docs/qa/mobile-mesh.webp)
