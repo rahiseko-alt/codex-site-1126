@@ -1,5 +1,5 @@
 {
-  "name": "rive-field-studies",
+  "name": "rive-signal-lab",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -10,6 +10,7 @@
     "build": "node scripts/build.mjs"
   },
   "dependencies": {
-    "@rive-app/canvas": "2.55.1"
+    "@rive-app/canvas": "2.55.1",
+    "@rive-app/webgl2": "2.55.1"
   }
 }

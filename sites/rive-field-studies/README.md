@@ -1,16 +1,12 @@
-# Afterglow
+# Signal Lab
 
-光の軌跡を選び、PC用とスマートフォン用の壁紙をPNGで保存するサイト。[公開版](https://rive-field-studies.kkoheikosehira.chatgpt.site/)
+Rive が公開している機能を、実ファイルで試す技術デモ集。[公開版](https://rive-field-studies.kkoheikosehira.chatgpt.site/)
 
-## 構成
-
-- `site/field-studies.riv` に PC とスマートフォン用のアートボード、文字、光のリボン、ハロー、モーション、ボタン、切り替えのステートマシンを収録。
-- `site/launch.js` は Rive の公式 Web ランタイムを起動し、画面サイズとキーボード入力を渡し、壁紙用アートボードの描画をPNGとして保存する。表示用の HTML は Canvas 1枚。
-- `scene/main.go` は `.riv` を再生成するソース。フォントとそのライセンス文は `scene/fonts/` にある。
+30件のブラウザデモを収録した。光のトップ画面も Rive のシーン。公式の機能一覧と製品メニューを基に、59項目の対応表をページ内に掲載している。制作サービス、エディター固有の操作、ネイティブ実行環境は公式資料にリンクしている。
 
 ## 起動
 
-Node.js 20 以上で、このフォルダから実行する。プレビューには Python 3 の静的サーバーを使う。
+Node.js 20 以上と Python 3 で、ここから実行する。
 
 ```sh
 npm ci
@@ -18,24 +14,27 @@ npm run build
 python3 -m http.server 4195 --directory dist
 ```
 
-`http://127.0.0.1:4195/` を開く。Orbit、Wave、Mesh をクリックまたはタップで切り替えられる。「Save desktop」は1920×1080、「Save phone」は1080×1920のPNGを保存する。Canvas にフォーカスすると `1`〜`3` で柄を選び、`D` と `M` で保存できる。壁紙はブラウザの中で描画する。
+ブラウザで `http://127.0.0.1:4195/` を開く。Canvas と WebGL2 の公式ランタイムを同じサイトから配信する。WebGL2 のデモは対応ブラウザが必要。
 
-## Rive ファイルの再生成
+## シーンと配信素材
 
-Go 1.25.9 以上で実行する。公開用ビルド自体には、リポジトリ内の生成済みファイルを利用できる。
+- `site/scenes/signal.riv` はオリジナル。光のシーン、ステートマシンのレイヤー、線形・ベジェ補間の比較用アートボードを含む。
+- `site/scenes/sources.json` に、Rive の公開ランタイムリポジトリから取得した検証ファイルの固定コミットと元パスを記録している。そのリポジトリの MIT ライセンスは [site/scenes/LICENSE](site/scenes/LICENSE)。
+- `site/catalog.js` がデモと機能一覧の対応を定義する。元の製品サイトは [Rive Features](https://rive.app/features)。
+
+オリジナルのシーンを変更した場合は Go 1.25.9 以上で再生成する。
 
 ```sh
 cd scene
-go run . ../site/field-studies.riv
+go run . ../site/scenes/signal.riv
 ```
 
 ## 再デプロイ
 
-このフォルダだけを `.openai/hosting.json` の Sites プロジェクトのソースへ同期する。同じコミットから `npm ci && npm run build` を実行し、`tar -czf /tmp/rive-field-studies-sites.tar.gz .openai/hosting.json dist` で梱包する。Sites でバージョンを保存してデプロイする。
+このフォルダだけを `.openai/hosting.json` にある Sites のソースへ同期する。そのコミットから `npm ci && npm run build` を実行し、`tar -czf /tmp/signal-lab-sites.tar.gz .openai/hosting.json dist` で梱包する。
 
 ## 画面確認
 
-- [PC の画面](docs/qa/desktop-orbit.webp)
-- [スマートフォンの画面](docs/qa/mobile-home.webp)
-- [PC 用の出力例・Wave](docs/qa/desktop-wave.webp)
-- [スマートフォン用の出力例・Mesh](docs/qa/mobile-mesh.webp)
+- [トップ](docs/qa/desktop.webp)
+- [スマートフォン](docs/qa/mobile.webp)
+- [デモ画面](docs/qa/workbench.webp)

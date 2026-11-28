@@ -1,20 +1,54 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Download original light wallpapers for desktop or phone, drawn and animated in Rive.">
-  <meta name="theme-color" content="#080a13">
-  <title>Afterglow — Light Wallpapers</title>
-  <link rel="stylesheet" href="./viewport.css">
-  <script src="./runtime/rive.js" defer></script>
-  <script src="./launch.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c0b12">
+<meta name="description" content="Riveのステートマシン、データバインディング、骨格、GPU描画をブラウザで試せる技術デモ集。">
+<title>Signal Lab — Rive 技術デモ</title>
+<link rel="stylesheet" href="./lab.css">
+<script src="./runtime/canvas/rive.js" defer></script>
+<script src="./lab.js" type="module"></script>
 </head>
 <body>
-  <main>
-    <canvas id="field" tabindex="0" aria-label="Afterglow wallpaper maker. Use 1, 2, or 3 to choose a pattern. Press D to save a desktop PNG or M to save a phone PNG."></canvas>
-    <p id="failure" hidden role="alert">The Rive scene could not load. Refresh the page to try again.</p>
-  </main>
-  <noscript>JavaScript is needed to start the Rive runtime.</noscript>
+<header class="site-nav wrap">
+  <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span>Signal Lab</a>
+  <nav aria-label="メイン"><a href="#lab">デモ</a><a href="#index">機能一覧</a><a class="nav-source" href="https://rive.app/features">Rive 公式 ↗</a></nav>
+</header>
+<main>
+  <section class="hero wrap" aria-labelledby="title">
+    <div class="hero-copy">
+      <p class="eyebrow">RIVE / INTERACTIVE GRAPHICS</p>
+      <h1 id="title">Motion<br>that <em>reacts.</em></h1>
+      <p class="intro">入力に反応するモーションを、触って理解する。<br>Rive の描画・アニメーション・状態制御を試せる技術デモ集。</p>
+      <div class="hero-actions"><a class="primary" href="#lab">デモを試す</a><button id="pulse" type="button" aria-pressed="false">光を強める</button></div>
+    </div>
+    <div class="hero-visual">
+      <canvas id="signal" aria-label="オレンジと紫の光の曲線が動く Rive アニメーション"></canvas>
+      <div class="visual-caption"><span><i></i> SIGNAL · REAL-TIME</span><a href="./scenes/signal.riv" download>オリジナル .riv ↗</a></div>
+    </div>
+  </section>
+  <section id="lab" class="lab wrap" aria-labelledby="lab-title">
+    <div class="section-head"><div><p class="eyebrow">THE PLAYGROUND</p><h2 id="lab-title">技術を試す</h2></div><a href="#index">全機能の対応表</a></div>
+    <div class="filters" id="filters" aria-label="デモの分類"></div>
+    <div class="workbench">
+      <aside aria-label="選べるデモ" class="demos" id="demos"></aside>
+      <article class="inspector" aria-labelledby="demo-title">
+        <div class="demo-heading"><div><p id="category"></p><h3 id="demo-title">読み込み中</h3></div><a id="asset" download>素材を保存</a></div>
+        <p class="demo-description" id="description"></p>
+        <div class="stage" id="stage"><canvas id="player" tabindex="0" aria-label="選択した Rive デモ"></canvas><p id="message" role="status"></p></div>
+        <div class="player-controls" id="player-controls"></div>
+        <div class="controls" id="controls"></div>
+        <details class="integration"><summary>実装とソース</summary><pre id="snippet"></pre><a id="origin">元のファイル</a></details>
+      </article>
+    </div>
+  </section>
+  <section id="index" class="catalog wrap" aria-labelledby="index-title">
+    <div class="section-head"><div><p class="eyebrow">REFERENCE</p><h2 id="index-title">機能一覧</h2></div><a href="https://rive.app/features">公式の一覧 ↗</a></div>
+    <p class="catalog-note">Webで試せる機能はデモに、制作・公開サービスや各環境で動く機能は公式ドキュメントにつながります。</p>
+    <div id="catalog"></div>
+  </section>
+</main>
+<footer class="wrap"><a class="brand" href="#">Signal Lab</a><div><a href="./scenes/LICENSE">Rive Runtime の MIT ライセンス</a><a href="https://github.com/rahiseko-alt/codex-site-1126/tree/main/sites/rive-field-studies">このサイトのソース ↗</a></div></footer>
 </body>
 </html>

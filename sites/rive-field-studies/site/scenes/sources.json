@@ -1,0 +1,33 @@
+{
+  "commit": "e19a2a680ff3426624400671dc1aa81c4251b355",
+  "files": {
+    "state": "tests/unit_tests/assets/state_machine_transition.riv",
+    "inputs": "tests/unit_tests/assets/listener_input_values.riv",
+    "events": "tests/unit_tests/assets/event_on_listener.riv",
+    "blend": "tests/unit_tests/assets/blend_test.riv",
+    "layers": "tests/unit_tests/assets/multiple_state_machines.riv",
+    "binding": "tests/unit_tests/assets/data_binding_test.riv",
+    "text": "tests/unit_tests/assets/runtime_nested_text_runs.riv",
+    "layout": "tests/unit_tests/assets/layout/grid_2x2.riv",
+    "scroll": "tests/unit_tests/assets/layout/layout_scroll_list.riv",
+    "components": "tests/unit_tests/assets/nested_artboard_opacity.riv",
+    "dynamic": "tests/unit_tests/assets/data_binding_images_test.riv",
+    "audio": "tests/unit_tests/assets/animascript_kept_sound.riv",
+    "script": "tests/unit_tests/assets/animascript_shader_signed.riv",
+    "timeline": "tests/unit_tests/assets/scripting_linear_animation.riv",
+    "slice": "tests/unit_tests/assets/n_slice_triangle.riv",
+    "feather": "tests/unit_tests/assets/feather_render_test.riv",
+    "clip": "tests/unit_tests/assets/animated_clipping.riv",
+    "bones": "tests/unit_tests/assets/ik_anim_test.riv",
+    "trim": "tests/unit_tests/assets/trim_path.riv",
+    "mesh": "tests/unit_tests/assets/nested_mesh_pointers.riv",
+    "rig": "tests/unit_tests/assets/two_bone_ik.riv",
+    "constraints": "tests/unit_tests/assets/follow_path_constraint.riv",
+    "order": "tests/unit_tests/assets/clipping_and_draw_order.riv",
+    "solos": "tests/unit_tests/assets/solos_with_nested_artboards.riv",
+    "raster": "tests/unit_tests/assets/image_listener_targets.riv",
+    "joystick": "tests/unit_tests/assets/joystick_databound_keyframe_test.riv",
+    "path": "tests/unit_tests/assets/follow_path.riv",
+    "textpath": "tests/unit_tests/assets/text_follow_path_shape_length.riv"
+  }
+}
