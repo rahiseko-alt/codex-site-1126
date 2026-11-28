@@ -2,6 +2,6 @@
   "name": "nagi-nail-tokyo",
   "private": true,
   "scripts": {
-    "build": "node -e \"const fs=require('node:fs'); fs.rmSync('dist',{recursive:true,force:true}); fs.cpSync('site','dist',{recursive:true});\""
+    "build": "node -e \"const fs=require('node:fs'); fs.rmSync('dist',{recursive:true,force:true}); fs.cpSync('site','dist',{recursive:true});\" && python3 theme/localize.py"
   }
 }

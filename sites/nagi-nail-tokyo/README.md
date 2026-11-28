@@ -1,26 +1,28 @@
 # nagi nail studio
 
-Paintbox を参考に、代々木上原を舞台にした架空のネイルサロン向けに制作した日本語サイト。写真風のビジュアルと線画はこのサイト用に生成。税込価格と日本時間での予約確認をデモとして実装している。Paintbox のトップに沿った順序と、スライド・商品ホバー・スクロール演出は [構成と動作の記録](docs/design-qa.md) に記載している。
+[参考サイト Paintbox](https://paint-box.com/) · [日本向け公開版](https://nagi-nail-tokyo.kkoheikosehira.chatgpt.site/) · [構成と動作の確認](docs/design-qa.md)
 
-[参考サイト](https://paint-box.com/) · [公開版](https://nagi-nail-tokyo.kkoheikosehira.chatgpt.site/)
+Paintbox の取得済みホームページを土台とした、代々木上原の架空ネイルサロン向けの差し替え版。HTMLのセクション順、クラス、テーマのCSS・JavaScriptを引き継いで、表示文言、写真、イラスト、テーマ配色の値を差し替えている。
 
 ## 起動
 
-Node.js 20 以上。外部依存のインストールは不要。
+Node.js 20 以上と Python 3 が必要。依存パッケージのインストールは不要。
 
 ```sh
 npm run build
 python3 -m http.server 4221 --directory dist
 ```
 
-`http://127.0.0.1:4221/` を開く。ネイルチップの長さでの絞り込み、検索、バッグ、ギフト、予約、ニュースレターの確認を試せる。入力はブラウザ内だけで扱い、実際の予約や送信は行わない。
+`http://127.0.0.1:4221/` を開く。予約、バッグ、検索結果、商品詳細は架空のサイト内デモ。入力内容は実際の予約・注文・登録として送信されない。
 
-## 変更する場所
+## 差し替える場所
 
-- `site/index.html` にページ本文、料金、予約フォームがある。
-- `site/style.css` の先頭に配色とフォントを定義している。
-- `site/assets/` にヒーロー写真、コレクション3点、スタジオの線画がある。
-- `site/main.js` が予約確認とタイムゾーン `Asia/Tokyo` を扱う。
+- `theme/index.source.html` はショップ向け外部連携を外した元のテンプレート。
+- `theme/localize.py` の `TEXT`、`PICTURES`、`PALETTE` で表示文言、画像とロゴ、配色を指定する。`LINKS` は同じサイト内のデモへのリンク割り当て。
+- `site/assets/` に写真風のビジュアル、手の線画、GIFがある。
+- `site/cdn/shop/t/74/assets/` に取得済みのテーマCSS、JavaScriptとベンダーバンドルがある。ビルドでテーマCSSのカスタムプロパティ値だけを置換する。
+- `site/reproduction.js` は静的デモ用にカートと検索の応答を返す。ページ本体の演出は元のテーマバンドルが実行する。
+- `site/demo/` で商品詳細、選択内容、日本時間の予約確認を試せる。
 
 ## 再デプロイ
 

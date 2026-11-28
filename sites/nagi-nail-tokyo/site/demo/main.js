@@ -16,7 +16,7 @@ let selectedProduct;
 let dialogOpener;
 
 function productImage(id) {
-  return 'assets/tips-' + id + '.webp';
+  return '/assets/tips-' + id + '.webp';
 }
 
 function showDialog(id, opener) {
@@ -79,7 +79,7 @@ for (const [index, product] of products.entries()) {
   card.style.setProperty('--delay', (index * 55) + 'ms');
   const photos = document.createElement('span');
   photos.className = 'product-image';
-  for (const src of [productImage(product.id), product.photo ? 'assets/' + product.photo : productImage(product.id)]) {
+  for (const src of [productImage(product.id), product.photo ? '/assets/' + product.photo : productImage(product.id)]) {
     const image = new Image();
     image.src = src;
     image.alt = '';
@@ -301,3 +301,15 @@ byId('edit-booking').addEventListener('click', () => {
   showBookingForm();
   bookingForm.elements.service.focus();
 });
+
+const entry = new URLSearchParams(location.search);
+const productId = entry.get('product');
+if (products.some(product => product.id === productId)) showProduct(stock.get(productId));
+else if (entry.has('search')) {
+  byId('search-input').value = entry.get('q') || '';
+  renderSearch();
+  showDialog('search');
+} else if (location.hash === '#booking') {
+  document.querySelector('.header-book').click();
+} else if (location.hash === '#bag') showDialog('cart');
+if (['short', 'long'].includes(entry.get('length'))) showLength(entry.get('length'));
