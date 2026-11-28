@@ -4,6 +4,8 @@
 
 Choose the target from the [root site index](README.md), then read that site's own README. Run install, build, and preview commands from that site's folder. Each folder owns its source, dependencies, reference images, and hosting configuration. Follow the [site layout guide](docs/site-layout.md) when adding another site.
 
+For a Japanese-market variant based on an existing site, follow [localize-recreated-site](.agents/skills/localize-recreated-site/SKILL.md).
+
 ## Agent skills
 
 Skills come from [mattpocock/skills](https://github.com/mattpocock/skills), installed into `.claude/skills/` with `npx skills add mattpocock/skills` and pinned in `skills-lock.json`. Do not edit them locally; update with `npx skills update`.
