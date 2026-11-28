@@ -3,98 +3,134 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f6e8e4">
-  <meta name="description" content="代々木上原を舞台にしたネイルスタジオのコンセプトサイト。季節のデザイン、料金、予約体験をご覧いただけます。">
-  <title>nagi nail studio｜代々木上原のネイルサロン</title>
+  <meta name="theme-color" content="#4b162c">
+  <meta name="description" content="代々木上原を舞台にしたネイルスタジオ。日本向けのネイルチップ、ギフト、スタジオ予約のコンセプトサイトです。">
+  <title>nagi nail studio｜ネイルチップと代々木上原のスタジオ</title>
   <link rel="preload" as="image" href="assets/hero.webp">
-  <link rel="stylesheet" href="style.css">
-  <script defer src="main.js"></script>
+  <link rel="stylesheet" href="style.css?v=editorial">
+  <script defer src="main.js?v=editorial"></script>
 </head>
 <body>
   <a class="skip" href="#main">本文へ</a>
-  <header class="header wrap">
-    <a class="brand" href="#" aria-label="nagi nail studio トップ">nagi<span>.</span><small>NAIL STUDIO</small></a>
-    <nav aria-label="メインナビゲーション">
-      <a href="#collection">デザイン</a>
-      <a href="#menu">メニュー</a>
-      <a href="#studio">スタジオ</a>
+  <p class="announcement">ネイルチップと、代々木上原の予約制スタジオ</p>
+  <header class="header">
+    <button type="button" class="icon mobile-menu" data-open="navigation" aria-label="メニューを開く"><i class="icon-menu"></i></button>
+    <a class="brand" href="#" aria-label="nagi nail studio トップ">nagi<span>.</span></a>
+    <nav class="primary-nav" aria-label="メインメニュー">
+      <details class="navigation-menu"><summary>ネイルチップ</summary><div><a href="#collection">すべてのチップ</a><a href="#collection" data-length="long">ロング</a><a href="#collection" data-length="short">ショート</a></div></details>
+      <a href="#studio">オーダーチップ</a>
+      <a href="#collection">ネイルカラー</a>
+      <a href="#guide">ネイルケア</a>
+      <a href="#journal">ジャーナル</a>
     </nav>
-    <button class="button button-small" data-book>予約を試す</button>
+    <div class="header-actions">
+      <button type="button" class="button header-book" data-book>サロンを予約</button>
+      <button type="button" class="icon" data-open="search" aria-label="商品を検索"><i class="icon-search"></i></button>
+      <button type="button" class="icon cart-button" data-open="cart" aria-label="バッグを開く"><i class="icon-bag"></i><span id="bag-count" hidden></span></button>
+    </div>
   </header>
   <main id="main">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-content">
-        <p class="eyebrow">YOYOGI-UEHARA, TOKYO</p>
-        <h1 id="hero-title">指先に、<br>余白を。</h1>
-        <p class="hero-description">透ける色、細い線、ふと目に留まる質感。<br class="wide-break">短い爪にも似合うデザインを、<br class="wide-break">一人ひとりの指先に合わせて仕立てます。</p>
-        <a class="button button-dark" href="#collection">デザインを見る</a>
-      </div>
-      <figure class="hero-photo">
-        <img src="assets/hero.webp" width="1500" height="1000" alt="深い赤と淡いローズのジェルネイル。温かな光が手元に差し込む">
-        <figcaption>透けるボルドーと、さりげない箔。</figcaption>
-      </figure>
+    <section class="slideshow" aria-label="ネイルチップの新作" aria-roledescription="スライドショー">
+      <h1 class="sr-only">nagi nail studio のネイルチップ</h1>
+      <article class="slide is-current">
+        <img src="assets/hero.webp" width="1500" height="1000" alt="深い赤とローズのロングネイル。温かな光が手元に差し込む" fetchpriority="high">
+        <div class="slide-copy"><p class="eyebrow">THE LONG EDIT</p><h2>指先を彩る、ロング。</h2><a class="button button-light" href="#collection" data-length="long">ロングを見る</a></div>
+      </article>
+      <article class="slide" inert aria-hidden="true">
+        <img src="assets/short-hero.webp" width="1500" height="1000" alt="淡いローズのショートネイルと、繊細に光るライン">
+        <div class="slide-copy"><p class="eyebrow">THE SHORT EDIT</p><h2>日常になじむ、ショート。</h2><a class="button button-light" href="#collection" data-length="short">ショートを見る</a></div>
+      </article>
+      <div class="slideshow-controls"><button type="button" class="slide-dot" data-slide="0" aria-label="ロングを表示" aria-current="true"></button><button type="button" class="slide-dot" data-slide="1" aria-label="ショートを表示"></button><button type="button" class="icon playback" aria-label="自動再生を一時停止">Ⅱ</button></div>
     </section>
-    <section class="section wrap" id="collection" aria-labelledby="collection-title">
-      <div class="section-heading">
-        <p class="eyebrow">COLLECTION</p>
-        <h2 id="collection-title">季節のデザイン</h2>
-        <p>色や質感を少しずつ変えて、日常の装いに合わせられる3つのデザイン。</p>
+
+    <section class="section collection wrap" id="collection" aria-labelledby="collection-title">
+      <div class="center section-heading" data-reveal>
+        <p class="eyebrow">THE TIP COLLECTION</p><h2 id="collection-title">ネイルチップを選ぶ</h2>
       </div>
-      <div class="collection-grid">
-        <figure class="design">
-          <img src="assets/milk.webp" width="510" height="845" alt="乳白色と淡いピンクのつややかなショートネイル" loading="lazy">
-          <figcaption><h3>淡雪 <span>AWAYUKI</span></h3><p>乳白色の奥に、淡いピンクを薄く重ねて。</p></figcaption>
-        </figure>
-        <figure class="design">
-          <img src="assets/amber.webp" width="510" height="845" alt="赤みを帯びたべっ甲のネイルに小さな銅色の箔" loading="lazy">
-          <figcaption><h3>琥珀 <span>KOHAKU</span></h3><p>透ける茶色に、かすかに光る銅色の箔。</p></figcaption>
-        </figure>
-        <figure class="design">
-          <img src="assets/mist.webp" width="510" height="845" alt="透け感のあるグレーの爪先に細い銀色のライン" loading="lazy">
-          <figcaption><h3>薄墨 <span>USUZUMI</span></h3><p>薄い墨色に、光の角度で見える銀の線。</p></figcaption>
-        </figure>
-      </div>
+      <div class="collection-grid" id="products"></div>
+      <div class="center collection-action" data-reveal><button type="button" class="button" id="show-all">すべてのチップを見る</button></div>
     </section>
-    <section class="story" id="studio" aria-labelledby="studio-title">
-      <div class="story-inner wrap">
-        <div class="story-art"><img src="assets/hands.webp" width="960" height="720" alt="手を重ねた輪郭と爪先の光を描いた、ワイン色の線画" loading="lazy"></div>
-        <div class="story-copy">
-          <p class="eyebrow">THE STUDIO</p>
-          <h2 id="studio-title">爪のかたちから、<br>一緒に考える。</h2>
-          <p>仕事や家事で手をよく使う方にも、無理のない長さと形を。色見本を肌のそばで見比べながら、光の当たり方や透け感まで確かめて仕上げます。</p>
-          <p>代々木上原の小さな予約制スタジオを想定した、ネイルサロンのコンセプトです。</p>
+
+    <section class="guide" id="guide" aria-label="ネイルチップの使い方">
+      <div class="wrap guide-inner" data-reveal>
+        <div><p class="eyebrow">THE FIT GUIDE</p><h2>つけ方のヒント</h2></div>
+        <div class="guide-carousel">
+          <div aria-live="polite"><h3 id="guide-title">爪の幅を測る</h3><p id="guide-copy">爪のいちばん広いところを、柔らかいメジャーで曲面に沿って測ります。</p></div>
+          <div class="guide-controls"><button type="button" class="icon" id="guide-prev" aria-label="前のヒント">‹</button><button type="button" class="icon" id="guide-next" aria-label="次のヒント">›</button></div>
         </div>
       </div>
     </section>
-    <section class="section wrap menu-section" id="menu" aria-labelledby="menu-title">
-      <div class="section-heading">
-        <p class="eyebrow">MENU</p>
-        <h2 id="menu-title">メニューと料金</h2>
-        <p>表示はデモ用の税込料金です。</p>
-      </div>
-      <div class="menu-list">
-        <article class="service"><div><h3>ワンカラー</h3><p>甘皮ケアと、肌になじむ色をひとつ。</p></div><div><strong>¥7,700</strong><small>約75分</small></div></article>
-        <article class="service"><div><h3>季節のデザイン</h3><p>コレクションから選び、色や配置を調整。</p></div><div><strong>¥9,900</strong><small>約90分</small></div></article>
-        <article class="service"><div><h3>オーダーアート</h3><p>色、線、質感を相談しながら仕立てるコース。</p></div><div><strong>¥12,100</strong><small>約120分</small></div></article>
-      </div>
+
+    <section class="editorial wrap center" aria-labelledby="editorial-title" data-reveal>
+      <p class="eyebrow">DESIGNED IN TOKYO</p><h2 id="editorial-title">色と質感の手帖</h2>
+      <ul><li>淡雪</li><li>琥珀</li><li>薄墨</li><li>若葉</li><li>葡萄</li></ul>
     </section>
-    <section class="section visit" aria-labelledby="visit-title">
-      <div class="wrap visit-inner">
-        <div>
-          <p class="eyebrow">BEFORE YOUR VISIT</p>
-          <h2 id="visit-title">ご来店の前に</h2>
-          <p>代々木上原駅周辺を想定した予約制サロンです。</p>
-          <button class="button button-dark" data-book>予約を試す</button>
-        </div>
-        <div class="faq">
-          <details><summary>爪が短くてもデザインできますか？</summary><p>短い爪でもお選びいただけます。爪の幅や長さに合わせて、箔やラインの位置を調整します。</p></details>
-          <details><summary>ジェルが残っている場合は？</summary><p>オフの時間を含めるため、予約時に「ジェルのオフあり」をお選びください。</p></details>
-          <details><summary>デザインを当日決められますか？</summary><p>色見本を見ながら決められます。気になるデザインの写真があれば、お持ちください。</p></details>
-        </div>
+
+    <section class="promo-grid" id="journal" aria-label="ジャーナルとスタジオ">
+      <article class="promo" data-reveal>
+        <img src="assets/amber.webp" width="510" height="845" alt="べっ甲色と銅色の箔を重ねたネイル" loading="lazy">
+        <div><p class="eyebrow">THE JOURNAL</p><h2>質感を重ねる。</h2><button type="button" class="button button-light" data-open="journal-detail">手帖を読む</button></div>
+      </article>
+      <article class="promo" id="studio" data-reveal>
+        <img src="assets/studio.webp" width="1200" height="800" alt="木とボルドーを基調にしたネイルスタジオのイメージ" loading="lazy">
+        <div><p class="eyebrow">VISIT US</p><h2>代々木上原のスタジオ</h2><button type="button" class="button button-light" data-book>サロンを予約</button></div>
+      </article>
+    </section>
+
+    <section class="feature feature-gift" id="gift">
+      <div class="feature-copy center" data-reveal><p class="eyebrow">GIFT CARDS</p><h2>ネイルを贈る。</h2><p>色を選ぶ時間まで、ギフトに。</p><button type="button" class="button" data-open="gift-detail">ギフトカードを見る</button></div>
+      <div class="feature-image" data-reveal><img src="assets/hands.webp" width="960" height="720" alt="爪先の光と重ねた手を描いたボルドーの線画" loading="lazy"></div>
+    </section>
+    <section class="feature feature-inspiration" id="inspiration">
+      <div class="feature-image" data-reveal><img src="assets/mist.webp" width="510" height="845" alt="スモーキーな透け感と、繊細な銀の線を合わせたネイル" loading="lazy"></div>
+      <div class="feature-copy center" data-reveal><p class="eyebrow">GET INSPIRED</p><h2>指先のアイデア</h2><p>装いや季節に合わせたデザインを、スタジオの手帖から。</p><button type="button" class="button" data-open="journal-detail">デザインの手帖へ</button></div>
+    </section>
+
+    <section class="newsletter center" id="newsletter" aria-labelledby="newsletter-title">
+      <div class="wrap" data-reveal>
+        <p class="eyebrow">STUDIO LETTER</p><h2 id="newsletter-title">新作のお知らせ</h2><p>季節のデザインを紹介するスタジオレターの登録デモです。</p>
+        <form id="newsletter-form"><label class="sr-only" for="email">メールアドレス</label><input id="email" type="email" autocomplete="email" placeholder="メールアドレス" required><button type="submit" class="button button-dark">確認</button></form>
+        <p id="newsletter-result" role="status"></p>
       </div>
     </section>
   </main>
-  <footer class="footer"><div class="wrap footer-inner"><a class="brand" href="#" aria-label="nagi nail studio トップ">nagi<span>.</span><small>NAIL STUDIO</small></a><p>日本向けネイルサロンのコンセプトサイト</p><a href="#main">ページ上部へ</a></div></footer>
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div><h2>サポート</h2><a href="#guide">サイズとつけ方</a><button type="button" data-open="support">ご利用案内</button></div>
+      <div><h2>デザイン</h2><a href="#collection">ネイルチップ</a><a href="#gift">ギフト</a><a href="#newsletter">スタジオレター</a></div>
+      <div><h2>nagi nail studio</h2><a href="#studio">スタジオ</a><button type="button" data-book>サロンを予約</button><a href="#journal">ジャーナル</a></div>
+      <p>日本向けネイルサロンのコンセプトサイト</p>
+    </div>
+  </footer>
+  <dialog id="navigation" aria-labelledby="navigation-title">
+    <div class="booking-head"><h2 id="navigation-title">メニュー</h2><button class="close-button" type="button" aria-label="閉じる">×</button></div>
+    <nav class="dialog-links" aria-label="モバイルメニュー"><a href="#collection">ネイルチップ</a><a href="#studio">オーダーチップ</a><a href="#collection">ネイルカラー</a><a href="#guide">ネイルケア</a><a href="#journal">ジャーナル</a><button type="button" class="button button-dark" data-book>サロンを予約</button></nav>
+  </dialog>
+  <dialog id="search" aria-labelledby="search-title">
+    <div class="booking-head"><h2 id="search-title">商品を検索</h2><button class="close-button" type="button" aria-label="閉じる">×</button></div>
+    <label class="sr-only" for="search-input">商品名・カラー</label><input id="search-input" type="search" placeholder="商品名・カラーを入力" autofocus><ul class="result-list" id="search-results"></ul>
+  </dialog>
+  <dialog id="product-detail" aria-labelledby="product-title">
+    <div class="booking-head"><h2 id="product-title"></h2><button class="close-button" type="button" aria-label="閉じる">×</button></div>
+    <img id="product-preview" width="400" height="350" alt=""><p id="product-description"></p><strong id="product-price"></strong>
+    <button class="button button-dark" type="button" id="add-to-bag">バッグに入れる</button>
+  </dialog>
+  <dialog id="cart" aria-labelledby="cart-title">
+    <div class="booking-head"><h2 id="cart-title">バッグ</h2><button class="close-button" type="button" aria-label="閉じる">×</button></div>
+    <ul class="result-list" id="cart-items"></ul><p id="cart-total"></p><p class="booking-note">商品選択のデモです。決済や注文は行われません。</p>
+  </dialog>
+  <dialog id="journal-detail" aria-labelledby="journal-title">
+    <div class="booking-head"><h2 id="journal-title">質感を重ねる</h2><button class="close-button" type="button" aria-label="閉じる">×</button></div>
+    <img src="assets/amber.webp" width="510" height="845" alt="琥珀色のネイルと箔" loading="lazy"><p>琥珀の透け感と、光の角度で輝く銅色の箔。単色のチップと組み合わせると、指先に自然な奥行きが出ます。</p>
+  </dialog>
+  <dialog id="gift-detail" aria-labelledby="gift-title">
+    <div class="booking-head"><h2 id="gift-title">ギフトカード</h2><button class="close-button" type="button" aria-label="閉じる">×</button></div>
+    <p>サロンやチップ選びの時間を贈るギフトカードのコンセプトです。</p><button type="button" class="button button-dark" id="add-gift">¥5,000 をバッグに入れる</button>
+  </dialog>
+  <dialog id="support" aria-labelledby="support-title">
+    <div class="booking-head"><h2 id="support-title">ご利用案内</h2><button class="close-button" type="button" aria-label="閉じる">×</button></div>
+    <p>架空のサロンと商品のデモです。バッグや予約で選んだ内容は、実際の注文・予約として送信されません。</p>
+  </dialog>
   <dialog id="booking" aria-labelledby="booking-title">
     <div class="booking-head"><div><p class="eyebrow">BOOKING DEMO</p><h2 id="booking-title">予約内容を選ぶ</h2></div><button class="close-button" type="button" aria-label="予約画面を閉じる">×</button></div>
     <p class="booking-note">予約画面のデモです。実際の予約や送信は行われません。</p>
