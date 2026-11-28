@@ -2,7 +2,25 @@ import { catalog, demos } from './catalog.js';
 import scenes from './scenes-index.js';
 
 const el = id => document.getElementById(id);
-const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const motionButtons = [...document.querySelectorAll('[data-motion]')];
+const playbackListeners = new Set();
+let motionEnabled = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function updateMotionButtons() {
+  for (const button of motionButtons) {
+    button.textContent = motionEnabled ? '全体のアニメーションを止める' : '全体のアニメーションを再生';
+    button.hidden = false;
+  }
+}
+
+for (const button of motionButtons) {
+  button.addEventListener('click', () => {
+    motionEnabled = !motionEnabled;
+    for (const apply of playbackListeners) apply(motionEnabled);
+    updateMotionButtons();
+  });
+}
+updateMotionButtons();
 let webgl;
 const sources = fetch('./scenes/sources.json').then(response => response.json()).catch(() => null);
 const canvasRuntime = window.rive;
@@ -95,6 +113,10 @@ function prepareDemo(demo, section) {
   let generation = 0;
   let selected = {};
   let near = false;
+  let visible = false;
+  let playback;
+  const setMotion = enabled => playback?.set(enabled);
+  playbackListeners.add(setMotion);
   let started = false;
   let interacted = false;
   let eviction;
@@ -201,16 +223,22 @@ function prepareDemo(demo, section) {
     const animation = options.animation || animations[0];
     const machine = options.machine || machines[0];
     const run = () => rv.play(options.animation || (demo.timeline ? animation : machine ?? animation));
-    const pause = makeButton('一時停止', () => {
-      if (rv.isPlaying) {
-        rv.pause();
-        pause.textContent = '再生';
-      } else {
-        run();
-        pause.textContent = '一時停止';
-      }
-    });
-    if (reducedMotion || demo.id === 'audio') pause.textContent = '再生';
+    let playing = motionEnabled && demo.id !== 'audio';
+    const pause = makeButton('', () => playback.set(!playing, true));
+    const syncPlayback = () => {
+      if (playing && visible) run();
+      else rv.pause();
+      pause.textContent = playing ? '一時停止' : '再生';
+    };
+    playback = {
+      sync: syncPlayback,
+      set(enabled, includeAudio = false) {
+        if (demo.id === 'audio' && !includeAudio && enabled) return;
+        playing = enabled;
+        syncPlayback();
+      },
+    };
+    syncPlayback();
     transport.append(pause, makeButton('はじめから', () => void open(options)));
     if (artboards.length > 1) labelControl('アートボード', select(artboards, options.artboard || demo.artboard || artboards[0], artboard =>
       void open({ artboard, engine: options.engine })));
@@ -220,9 +248,8 @@ function prepareDemo(demo, section) {
     }
     if (demo.timeline && animation) {
       labelControl('時間（秒）', range(0, 0, frameRange, .01, value => {
-        rv.pause();
+        playback.set(false, true);
         rv.scrub(animation, value);
-        pause.textContent = '再生';
       }));
     }
     if (demo.layout) labelControl('幅', range(100, 28, 100, 1, value => {
@@ -233,8 +260,7 @@ function prepareDemo(demo, section) {
       void open({ ...options, engine: value === 'WebGL2' ? 'webgl2' : 'canvas' })));
     if (demo.id === 'audio') transport.append(makeButton('音をオン', () => {
       rv.volume = 1;
-      run();
-      pause.textContent = '一時停止';
+      playback.set(true, true);
       message('キャンバスをクリックして音を試せます。');
     }));
     if (demo.id === 'text') {
@@ -259,6 +285,7 @@ function prepareDemo(demo, section) {
     release?.disconnect();
     player?.cleanup();
     player = undefined;
+    playback = undefined;
     controls.replaceChildren();
     transport.replaceChildren();
     message('読み込み中…');
@@ -287,7 +314,7 @@ function prepareDemo(demo, section) {
         animations: animation,
         stateMachines: animation ? undefined : machine,
         layout: new api.Layout({ fit: demo.layout ? api.Fit.Layout : api.Fit.Contain, alignment: api.Alignment.Center }),
-        autoplay: !reducedMotion && demo.id !== 'audio', autoBind: true,
+        autoplay: false, autoBind: true,
         onLoad: () => {
           if (current !== generation) return;
           const resize = () => rv.resizeDrawingSurfaceToCanvas();
@@ -296,7 +323,6 @@ function prepareDemo(demo, section) {
           resize();
           const machine = options.machine || rv.stateMachineNames[0];
           const animation = options.animation || rv.animationNames[0];
-          if (!machine && !demo.timeline && animation) rv.play(animation);
           if (demo.id === 'audio') rv.volume = 0;
           stage.setAttribute('aria-busy', 'false');
           if (!near) rv.stopRendering();
@@ -340,6 +366,7 @@ function prepareDemo(demo, section) {
         release?.disconnect();
         player?.cleanup();
         player = undefined;
+        playback = undefined;
         started = false;
         settings.style.minHeight = settings.offsetHeight + 'px';
         controls.replaceChildren();
@@ -356,9 +383,18 @@ function prepareDemo(demo, section) {
   }
   demoObservers.set(stage, observe);
   viewport.observe(stage);
+  visibilityCallbacks.set(stage, entry => {
+    visible = entry.isIntersecting && entry.intersectionRatio >= .12;
+    playback?.sync();
+  });
+  visibleViewport.observe(stage);
 }
 
 const demoObservers = new Map();
+const visibilityCallbacks = new Map();
+const visibleViewport = new IntersectionObserver(entries => {
+  for (const entry of entries) visibilityCallbacks.get(entry.target)(entry);
+}, { threshold: .12 });
 const viewport = new IntersectionObserver(entries => {
   for (const entry of entries) demoObservers.get(entry.target)(entry);
 }, { rootMargin: '380px 0px' });
@@ -375,15 +411,14 @@ for (const category of new Set(demos.map(demo => demo.category))) {
 
 const signal = new canvasRuntime.Rive({
   src: './scenes/signal.riv', canvas: el('signal'), stateMachines: 'Signal Logic',
-  autoplay: !reducedMotion,
+  autoplay: motionEnabled,
   onLoad: () => {
     const resize = () => signal.resizeDrawingSurfaceToCanvas();
     new ResizeObserver(resize).observe(el('signal'));
     resize();
-    if (reducedMotion) {
-      signal.play();
-      requestAnimationFrame(() => signal.pause());
-    }
+    if (motionEnabled) signal.play();
+    else signal.pause();
+    playbackListeners.add(enabled => enabled ? signal.play() : signal.pause());
     const pulseButton = el('pulse');
     pulseButton.disabled = false;
     pulseButton.onclick = () => {

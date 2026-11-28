@@ -8,7 +8,7 @@
 <title>Signal Lab — Rive 技術デモ</title>
 <link rel="stylesheet" href="./lab.css">
 <script src="./runtime/canvas/rive.js" defer></script>
-<script src="./lab.js" type="module"></script>
+<script src="./lab.js?v=motion" type="module"></script>
 </head>
 <body>
 <header class="site-nav wrap">
@@ -21,7 +21,7 @@
       <p class="eyebrow">RIVE / INTERACTIVE GRAPHICS</p>
       <h1 id="title">Motion<br>that <em>reacts.</em></h1>
       <p class="intro">Rive の反応、動き、描画を、スクロールしながら順番に試せる30件の技術デモ。</p>
-      <div class="hero-actions"><a class="primary" href="#lab">デモを試す</a><button id="pulse" type="button" aria-pressed="false" disabled>光を強める</button></div>
+      <div class="hero-actions"><a class="primary" href="#lab">デモを試す</a><button id="pulse" type="button" aria-pressed="false" disabled>光を強める</button><button type="button" data-motion hidden></button></div>
     </div>
     <div class="hero-visual">
       <canvas id="signal" aria-label="オレンジと紫の光の曲線が動く Rive アニメーション"></canvas>
@@ -29,7 +29,7 @@
     </div>
   </section>
   <section id="lab" class="lab wrap" aria-labelledby="lab-title">
-    <div class="section-head"><div><p class="eyebrow">RIVE DEMOS</p><h2 id="lab-title">全30件のデモ</h2></div><a href="#index">全機能の対応表</a></div>
+    <div class="section-head"><div><p class="eyebrow">RIVE DEMOS</p><h2 id="lab-title">全30件のデモ</h2></div><button class="motion-toggle" type="button" data-motion hidden></button></div>
     <div id="demo-stack"></div>
     <template id="demo-template">
       <article class="inspector">

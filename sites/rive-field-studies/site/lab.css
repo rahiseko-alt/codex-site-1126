@@ -22,8 +22,9 @@ h1{font-size:clamp(62px,7.1vw,106px);letter-spacing:-.084em;font-weight:700;line
 h1 em{font-style:normal;color:#ffc0a9}
 .intro{line-height:1.85;color:var(--muted);font-size:15px;margin-bottom:26px}
 .hero-actions{display:flex;gap:10px;flex-wrap:wrap}
-.primary,.hero-actions button{padding:12px 18px;border-radius:6px;font-weight:650;font-size:13px}
+.primary,.hero-actions button,.motion-toggle{padding:12px 18px;border-radius:6px;font-weight:650;font-size:13px}
 .primary{background:#ffc0a9;color:#22121a;display:inline-flex;align-items:center}
+.motion-toggle:hover{border-color:var(--accent)}
 .primary:hover{background:#ffdbc9}
 .hero-actions button:hover,.hero-actions button[aria-pressed=true]{border-color:#bd6c69}
 .hero-visual{position:relative;min-width:0;align-self:stretch}

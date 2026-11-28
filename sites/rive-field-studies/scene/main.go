@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"os"
+	"path/filepath"
 
 	"github.com/redriot-io/rive-go/rive/builder"
 )
@@ -72,8 +73,15 @@ func trace(ab *builder.ArtboardBuilder, spark *builder.ShapeRef) {
 }
 
 func main() {
+	if len(os.Args) == 3 && os.Args[1] == "--motion-demos" {
+		if err := motionDemos(filepath.Clean(os.Args[2])); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		return
+	}
 	if len(os.Args) != 2 {
-		fmt.Fprintln(os.Stderr, "usage: go run . <output.riv>")
+		fmt.Fprintln(os.Stderr, "usage: go run . <output.riv> or go run . --motion-demos <output-directory>")
 		os.Exit(2)
 	}
 	file := builder.New()
