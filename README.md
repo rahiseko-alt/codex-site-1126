@@ -16,6 +16,7 @@
 | Nail Salon Cotty | [sites/nail-cotty](sites/nail-cotty/README.md) |
 | Longleage | [sites/longleage](sites/longleage/README.md) |
 | Paintbox | [sites/paint-box](sites/paint-box/README.md) |
+| nagi nail studio 日本向けネイルサロン | [sites/nagi-nail-tokyo](sites/nagi-nail-tokyo/README.md) |
 | Townhouse | [sites/townhouse](sites/townhouse/README.md) |
 | EVER | [sites/ever](sites/ever/README.md) |
 | Chillhouse Soho | [sites/chillhouse-soho](sites/chillhouse-soho/README.md) |
