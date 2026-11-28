@@ -384,13 +384,15 @@ const signal = new canvasRuntime.Rive({
       signal.play();
       requestAnimationFrame(() => signal.pause());
     }
-    el('pulse').onclick = () => {
+    const pulseButton = el('pulse');
+    pulseButton.disabled = false;
+    pulseButton.onclick = () => {
       const pulse = signal.stateMachineInputs('Signal Logic')?.find(item => item.name === 'Pulse');
       if (!pulse) return;
       pulse.value = Number(!pulse.value);
       signal.play();
-      el('pulse').setAttribute('aria-pressed', String(Boolean(pulse.value)));
-      el('pulse').textContent = pulse.value ? '光を弱める' : '光を強める';
+      pulseButton.setAttribute('aria-pressed', String(Boolean(pulse.value)));
+      pulseButton.textContent = pulse.value ? '光を弱める' : '光を強める';
     };
   },
 });
